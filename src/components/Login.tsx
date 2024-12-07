@@ -80,7 +80,7 @@ const Login: FC = () => {
                 onSubmit("ee@ee.com", "eeeeeeee");
               }}
             >
-              Login as Guest
+              Login as Moderator
             </button>
           </form>
           <div className="flex flex-row justify-between items-center gap-4 my-6">
