@@ -73,7 +73,7 @@ const router = createBrowserRouter([
     
     ]
   },
-  { path: "Show", element: <Reddit/> },
+  { path: "login", element: <Login/> },
   { path: "*", element: <Navigate to="/login" /> }
 ]);
 
