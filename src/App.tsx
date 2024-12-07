@@ -31,7 +31,7 @@ const ProtectedRoute = () => {
 
 
   if (!user) {
-    return <Navigate to="/show" state={{ from: location }} />;
+    return <Navigate to="/login" state={{ from: location }} />;
   }
 
 
@@ -74,7 +74,7 @@ const router = createBrowserRouter([
     ]
   },
   { path: "Show", element: <Reddit/> },
-  { path: "*", element: <Navigate to="/Show" /> }
+  { path: "*", element: <Navigate to="/login" /> }
 ]);
 
 const App: FC = () => {
