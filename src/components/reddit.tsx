@@ -563,7 +563,7 @@ useEffect(() => {
             </div>
             {currentUser && (
               <span className="text-sm text-gray-400 ">
-                {currentUser.displayName}
+                 {currentUser.displayName}............
               </span>
             )}
           </div>

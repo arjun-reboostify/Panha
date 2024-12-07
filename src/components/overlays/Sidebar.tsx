@@ -92,7 +92,7 @@ const CompactResponsiveSidebar: React.FC = () => {
           rotate: isSidebarOpen ? 90 : 0,
           transition: { duration: 0.3 }
         }}
-        className="fixed right-4 top-4 
+        className="fixed right-0 top-0
                    bg-black/80 text-white p-3 rounded-full z-[100] 
                    shadow-lg hover:bg-black/90 transition-all"
         aria-label="Toggle Menu"
