@@ -42,7 +42,7 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Yes/No Section */}
-      <div className="flex justify-center items-center w-full bg-gradient-to-br from-green-100 to-green-200 p-6 mb-8 lg:mb-0 rounded-lg">
+      {/* <div className="flex justify-center items-center w-full bg-gradient-to-br from-green-100 to-green-200 p-6 mb-8 lg:mb-0 rounded-lg">
         <div className="bg-white shadow-lg rounded-xl p-6 text-center w-full max-w-md">
           <h2 className="text-2xl font-semibold text-gray-800 mb-6">
             Do you like Tailwind CSS?
@@ -62,12 +62,12 @@ const HeroSection: React.FC = () => {
             </a>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Image Section */}
       <div className="w-full lg:w-1/2 flex items-center justify-center">
         <div className="max-w-full max-h-[500px] overflow-hidden rounded-xl shadow-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-          <img src={D} alt="Holiday Travel" className="w-full h-auto object-cover rounded-xl" />
+          <img src='/logo.jpg' alt="Holiday Travel" className="w-full h-auto object-cover rounded-xl" />
         </div>
       </div>
     </div></>

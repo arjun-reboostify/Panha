@@ -105,7 +105,7 @@ const ContactForm: React.FC = () => {
           <motion.button 
             type="submit" 
             disabled={isSubmitting}
-            className="w-full bg-yellow-500 text-black py-3 rounded-md hover:bg-yellow-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-blue-400 text-black py-3 rounded-md hover:bg-yellow-600 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
