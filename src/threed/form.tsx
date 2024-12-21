@@ -9,6 +9,7 @@ interface Option {
 
 interface FormData {
   name: string;
+  no: string;
   email: string;
   message: string;
   preference: string;
@@ -19,6 +20,7 @@ const InputForm: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: '',
+    no: '',
     email: '',
     message: '',
     preference: '',
@@ -66,7 +68,7 @@ const InputForm: React.FC = () => {
       });
 
       setSuccessMessage('Your problem submitted successfully, now relax!');
-      setFormData({ name: '', email: '', message: '', preference: '', category: '' });
+      setFormData({ name: '', no:'',email: '', message: '', preference: '', category: '' });
     } catch (err) {
       setError('Failed to submit the form: ' + (err as Error).message);
     } finally {
@@ -231,6 +233,29 @@ const InputForm: React.FC = () => {
               required
             />
           </div>
+          <div>
+  <label
+    htmlFor="no"
+    className={`block mb-1 transition-colors duration-300 ${
+      darkMode ? 'text-white' : 'text-black'
+    }`}
+  >
+    Phone No.
+  </label>
+  <input
+    type="text"
+    id="no"
+    placeholder="+91 . . . . .  . . . . ."
+    name="no"
+    value={formData.no}
+    onChange={handleInputChange}
+    maxLength={10} // Restrict the input to 10 characters
+    pattern="[0-9]{10}" // Allow only 10 numeric characters
+    className={`w-full px-4 py-2 rounded-lg focus:ring-2 focus:ring-green-500 transition-colors duration-300 ${
+      darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'
+    }`}
+  />
+</div>
 
           <button
             type="submit"
