@@ -195,6 +195,13 @@ const PreferenceStats: React.FC = () => {
               ))}
             </tbody>
           </table>
+          
+          {userData.map((user, index) => (
+  <div key={index} className="px-6 py-4 text-2xl text-gray-300 max-h-40 overflow-y-auto">
+    <div className="whitespace-pre-wrap break-words">{user.message}</div>
+  </div>
+))}
+
         </div>
       </div>
     </div>
