@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { noterFirestore, firebaseTimestamp } from '../firebase/index';
 import { Moon, Sun } from 'lucide-react';
 
@@ -9,7 +10,7 @@ interface Option {
 
 interface FormData {
   name: string;
-  no: string;
+  // no: string;
   email: string;
   message: string;
   preference: string;
@@ -20,7 +21,7 @@ const InputForm: React.FC = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [formData, setFormData] = useState<FormData>({
     name: '',
-    no: '',
+    // no: '',
     email: '',
     message: '',
     preference: '',
@@ -53,7 +54,7 @@ const InputForm: React.FC = () => {
       [name]: value
     });
   };
-
+  const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -68,12 +69,16 @@ const InputForm: React.FC = () => {
       });
 
       setSuccessMessage('Your problem submitted successfully, now relax!');
-      setFormData({ name: '', no:'',email: '', message: '', preference: '', category: '' });
+      setFormData({ name: '',email: '', message: '', preference: '', category: '' });//no:''
     } catch (err) {
       setError('Failed to submit the form: ' + (err as Error).message);
     } finally {
       setIsLoading(false);
     }
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate('/info'); // Replace '/target-path' with your desired route
+    }, 1000);
   };
 
   return (
@@ -114,7 +119,7 @@ const InputForm: React.FC = () => {
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className={`block mb-1 transition-colors duration-300 ${
+            <label htmlFor="email" className={`block mb-1  font-bold transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-black'
             }`}>
               Email<p className='text-gray-400'>(not required)</p>
@@ -130,16 +135,16 @@ const InputForm: React.FC = () => {
                 darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'
               }`}
             />
-            <p className='text-gray-400'>
+            <p className='text-xs text-gray-400'>
               (just for checking the entry is authentic and not a spam and definitely will not be recorded and discarded after few hours of submission)
             </p>
           </div>
 
           <div>
-            <label className={`block text-2xl m-2 transition-colors duration-300 ${
+            <label className={`block font-bold m-2 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-black'
             }`}>
-              *Related to ...
+              Related to ...
             </label>
             <div className="space-y-2">
               {preferenceOptions.map((option) => (
@@ -171,7 +176,7 @@ const InputForm: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="name" className={`block mb-1 transition-colors duration-300 ${
+            <label htmlFor="name" className={`block mb-1  font-bold  transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-black'
             }`}>
               If chosen other above
@@ -190,7 +195,7 @@ const InputForm: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="category" className={`block mb-1 transition-colors duration-300 ${
+            <label htmlFor="category" className={`block  font-bold  mb-1 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-black'
             }`}>
               Type ?
@@ -215,7 +220,7 @@ const InputForm: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="message" className={`block mb-1 transition-colors duration-300 ${
+            <label htmlFor="message" className={`block  font-bold  mb-1 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-black'
             }`}>
              Pour your heart out. It's completely anonymous
@@ -228,12 +233,12 @@ const InputForm: React.FC = () => {
               className={`w-full px-4 py-2 rounded-lg focus:ring-2 focus:ring-green-500 resize-none transition-colors duration-300 ${
                 darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'
               }`}
-              placeholder='enter your thought openly .......'
+              placeholder='write your thoughts openly .......'
               rows={4}
               required
             />
           </div>
-          <div>
+          {/* <div>
   <label
     htmlFor="no"
     className={`block mb-1 transition-colors duration-300 ${
@@ -255,7 +260,7 @@ const InputForm: React.FC = () => {
       darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'
     }`}
   />
-</div>
+</div> */}
 
           <button
             type="submit"
