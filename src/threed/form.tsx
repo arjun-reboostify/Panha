@@ -17,7 +17,7 @@ interface FormData {
 }
 
 const InputForm: React.FC = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     no: '',
@@ -240,12 +240,12 @@ const InputForm: React.FC = () => {
       darkMode ? 'text-white' : 'text-black'
     }`}
   >
-    Phone No.
+    Phone No. <p className='text-gray-500'>not required</p>
   </label>
   <input
     type="text"
     id="no"
-    placeholder="+91 . . . . .  . . . . ."
+    placeholder="+91 . . . . .  . . . . . 10 digits"
     name="no"
     value={formData.no}
     onChange={handleInputChange}
