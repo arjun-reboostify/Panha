@@ -77,11 +77,11 @@ const InputForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-         <div className='flex'>
+    <div className="max-w-2xl  mx-auto p-6 bg-white rounded-lg shadow-lg">
+         <div className='flex justify-center items-center'>
     <img 
   src="/logo.jpg"
-                  className="h-10 m-5 w-10"
+                  className="h-10 w-10"
 /> <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-blue-600  m-5
 bg-clip-text text-transparent">
 Panha
