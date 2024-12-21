@@ -1,7 +1,29 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram,MessageCircle, Linkedin } from 'lucide-react';
 
+
 const SocialQuoteComponent = () => {
+    
+        const links = [
+          {
+            text: "WhatsApp Group:",
+            icon: MessageCircle,
+            label: " Click Here",
+            href: "https://chat.whatsapp.com/BLikt4WP0yt2AG1paLIRFA"
+          },
+          {
+            text: "Instagram:",
+            icon: Instagram,
+            label: "Click Here",
+            href: "https://www.instagram.com/panhamentalhealth/profilecard/"
+          },
+          {
+            text: "LinkedIn:",
+            icon: Linkedin,
+            label: "Click Here",
+            href: "https://www.linkedin.com/company/your-panha/"
+          }
+        ];
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-black via-blue-900 to-black text-center items-center justify-between">
       {/* Heading */}
@@ -28,7 +50,7 @@ const SocialQuoteComponent = () => {
           <div className="overflow-x-auto">
   <table className="w-full table-auto border-collapse border  border-black text-left">
     <thead>
-      <tr className=" bg-gradient-to-br from-black via-blue-900 to-black text-white">
+      <tr className=" bg-transparent text-white">
         <th className="border border-black px-6 py-3"></th>
         <th className="border border-black px-6 py-3">Details</th>
       </tr>
@@ -58,69 +80,45 @@ const SocialQuoteComponent = () => {
 </div>
 
         </div>
-      </main>
+      </main> <blockquote
+          className="text-2xl italic text-white m-10 px-8 max-w-xl animate-fadeIn"
+        >
+   Yha bina judge Kiye aapko sunna jata hai....
 
-      {/* Socials Footer */}
-      <footer className="w-full py-6 bg-black">
-  <div className="flex justify-center space-x-6 animate-bounce">
-    <div className="flex flex-col items-center">
-      <a
-        href="https://chat.whatsapp.com/BLikt4WP0yt2AG1paLIRFA"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-gray-300 hover:text-white transition-colors duration-200"
-      >
-        <MessageCircle size={32} />
-      </a>
-      <span className="text-sm text-gray-300 mt-1">WhatsApp</span>
-    </div>
-    {/* <div className="flex flex-col items-center">
-      <a
-        href="https://facebook.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-gray-300 hover:text-white transition-colors duration-200"
-      >
-        <Facebook size={32} />
-      </a>
-      <span className="text-sm text-gray-300 mt-1">Facebook</span>
-    </div> */}
-    {/* <div className="flex flex-col items-center">
-      <a
-        href="https://twitter.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-gray-300 hover:text-white transition-colors duration-200"
-      >
-        <Twitter size={32} />
-      </a>
-      <span className="text-sm text-gray-300 mt-1">Twitter</span>
-    </div> */}
-    <div className="flex flex-col items-center">
-      <a
-        href="https://www.instagram.com/panhamentalhealth/profilecard/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-gray-300 hover:text-white transition-colors duration-200"
-      >
-        <Instagram size={32} />
-      </a>
-      <span className="text-sm text-gray-300 mt-1">Instagram</span>
-    </div>
-    <div className="flex flex-col items-center">
-      <a
-        href="https://www.linkedin.com/company/your-panha/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-gray-300 hover:text-white transition-colors duration-200"
-      >
-        <Linkedin size={32} />
-      </a>
-      <span className="text-sm text-gray-300 mt-1">LinkedIn</span>
-    </div>
-  </div>
-  <p className="text-white mt-4 text-center">&copy; 2024 Panha</p>
-</footer>
+        </blockquote>
+
+      {/* Bouncing Links with Labels */}
+      <div className="flex flex-col items-center space-y-8 z-10">
+  <table className="table-auto border-4 border-gray-800 bg-transparent w-full">
+    <thead className="bg-black text-white">
+      <tr>
+        <th className="px-6 py-3 text-lg font-bold">Toh Deri Kis Baat ki Join the Revolution Now!!!</th>
+      </tr>
+    </thead>
+    <tbody>
+      {links.map((link, index) => (
+        <tr key={link.label} className="border-b border-gray-800">
+          <td className="px-6 py-4 text-gray-300 flex flex-col items-center space-y-2">
+            <div className="flex items-center justify-center mb-2">
+              <span className="text-gray-300 text-lg">{`${index + 1}. ${link.text}`}</span>
+            </div>
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center space-y-2 px-10 py-1 bg-blue-900  rounded-lg transition-all duration-200 text-gray-300 hover:text-white animate-bounce"
+            >
+              <link.icon className='font-bold' size={40} />
+              <span className="text-2xl font-bold mx-4">{link.label}</span>
+            </a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+      
 
 
     </div>
