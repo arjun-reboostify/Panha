@@ -131,17 +131,17 @@ const PreferenceStats: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-gray-800 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-white mb-6">Application Usage Statistics</h2>
+      <h2 className="text-2xl font-bold text-white mb-6">user stats</h2>
       
       {/* Preference Statistics Chart */}
-      {renderBarChart(preferenceStats, "Application Type Preferences")}
+      {renderBarChart(preferenceStats, "problem preference")}
 
       {/* Category Statistics Chart */}
-      {renderBarChart(categoryStats, "Usage Categories")}
+      {renderBarChart(categoryStats, "type")}
 
       {/* User Registry Section */}
       <div className="mt-8">
-        <h3 className="text-xl font-bold text-white mb-4">User Registry</h3>
+        <h3 className="text-xl font-bold text-white mb-4">User data scroll right</h3>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-gray-900 rounded-lg overflow-hidden">
             <thead className="bg-gray-700">
