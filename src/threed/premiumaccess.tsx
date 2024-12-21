@@ -37,7 +37,7 @@ const PremiumAccess: React.FC = () => {
   return (<><Side />
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-6">
-        <h2 className="text-2xl font-bold mb-6 text-center">Premium Access</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Admin Access</h2>
         
      
 
