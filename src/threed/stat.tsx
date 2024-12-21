@@ -176,9 +176,10 @@ const PreferenceStats: React.FC = () => {
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Date</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Email</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Preference</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">type</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">problem</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Other</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Type</th>
+               
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Message</th>
               </tr>
             </thead>
@@ -192,10 +193,11 @@ const PreferenceStats: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {categoryLabels[user.category] || user.category}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {preferenceLabels[user.preference] || user.preference}
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.name}</td>
+            
                   <td className="px-6 py-4 text-sm text-gray-300">
                     <div className="max-w-xs truncate">{user.message}</div>
                   </td>

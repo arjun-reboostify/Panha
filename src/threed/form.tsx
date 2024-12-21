@@ -91,7 +91,7 @@ Panha
       <form onSubmit={handleSubmit} className="space-y-4">
         
         <div>
-          <label htmlFor="email" className="block text-black mb-1">Email </label>
+          <label htmlFor="email" className="block text-black mb-1">Email<p className='text-gray-400 '>(not required)</p> </label>
           <input
             type="email"
             id="email"
