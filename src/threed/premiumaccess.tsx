@@ -20,7 +20,7 @@ const PremiumAccess: React.FC = () => {
 
   const handlePremiumAccess = () => {
     // Simple premium code validation (replace with your preferred logic)
-    if (premiumCode.trim() === '123') {
+    if (premiumCode.trim() === 'admin@1234') {
       setIsPremium(true);
       localStorage.setItem('premiumAccess', 'true');
       toast.success('Premium access granted!');
@@ -49,7 +49,7 @@ const PremiumAccess: React.FC = () => {
                 value={premiumCode}
                 onChange={(e) => setPremiumCode(e.target.value)}
                 placeholder="Enter 12-digit premium code" 
-                maxLength={3}
+                maxLength={10}
                 className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
@@ -58,24 +58,19 @@ const PremiumAccess: React.FC = () => {
               onClick={handlePremiumAccess}
               className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded transition duration-300"
             >
-              Unlock Premium Access
+              Unlock Admin Access
             </button>
           </>
         ) : (
           <div className="text-center">
-            <p className="text-green-500 font-bold mb-4">✓ Premium Access Granted</p>
+           
             <div className="space-y-2">
-              <p>You now have access to:</p>
-              <ul className="list-disc list-inside text-left">
-                <li>Fu (Reward) Route</li>
-                <li>Additional Premium Features</li>
-                <li>Exclusive Content</li>
-              </ul>
+              
               <button 
                 onClick={() => navigate('/stat')}
                 className="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded"
               >
-                Go to Premium Route
+                Go to Admin Route
               </button>
             </div>
           </div>
