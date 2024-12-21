@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { noterFirestore } from '../firebase/index';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
 interface UserData {
   name: string;
@@ -15,7 +15,7 @@ interface UserData {
 
 interface ChartData {
   name: string;
-  count: number;
+  value: number;
 }
 
 const PreferenceStats: React.FC = () => {
@@ -24,6 +24,13 @@ const PreferenceStats: React.FC = () => {
   const [userData, setUserData] = useState<UserData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Vibrant color palette for the pie charts
+  const COLORS = [
+    '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', 
+    '#FFEEAD', '#D4A5A5', '#9B6B6B', '#CE96B4',
+    '#4EA5D9', '#FF9F1C', '#2EC4B6', '#E71D36'
+  ];
 
   const preferenceLabels: { [key: string]: string } = {
     'breakup_trauma': 'Breakup trauma or toxic relationship',
@@ -64,12 +71,12 @@ const PreferenceStats: React.FC = () => {
 
         const formattedPreferenceStats = Object.entries(preferences).map(([key, value]) => ({
           name: preferenceLabels[key] || key,
-          count: value
+          value
         }));
 
         const formattedCategoryStats = Object.entries(categories).map(([key, value]) => ({
           name: categoryLabels[key] || key,
-          count: value
+          value
         }));
 
         setPreferenceStats(formattedPreferenceStats);
@@ -86,28 +93,49 @@ const PreferenceStats: React.FC = () => {
     fetchData();
   }, []);
 
-  const renderBarChart = (data: ChartData[], title: string) => (
+  const renderPieChart = (data: ChartData[], title: string) => (
     <div className="mb-12">
       <h3 className="text-xl font-bold text-white mb-4">{title}</h3>
-      <div className="w-full h-80">
+      <div className="w-full h-96">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-            <XAxis 
-              dataKey="name"
-              tick={{ fill: '#9CA3AF' }}
-              angle={-45}
-              textAnchor="end"
-              height={100}
-            />
-            <YAxis tick={{ fill: '#9CA3AF' }} />
+          <PieChart>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              innerRadius={60}
+              outerRadius={140}
+              paddingAngle={5}
+              dataKey="value"
+              label={({name, percent}) => `${name} (${(percent * 100).toFixed(0)}%)`}
+              labelLine={{ stroke: '#ffffff', strokeWidth: 0.5 }}
+            >
+              {data.map((entry, index) => (
+                <Cell 
+                  key={`cell-${index}`} 
+                  fill={COLORS[index % COLORS.length]}
+                  stroke="#1F2937"
+                  strokeWidth={2}
+                />
+              ))}
+            </Pie>
             <Tooltip 
-              contentStyle={{ backgroundColor: '#1F2937', border: 'none' }}
-              labelStyle={{ color: '#fff' }}
-              itemStyle={{ color: '#10B981' }}
+              contentStyle={{ 
+                backgroundColor: '#1F2937', 
+                border: 'none',
+                borderRadius: '8px',
+                padding: '10px'
+              }}
+              itemStyle={{ color: '#ffffff' }}
             />
-            <Bar dataKey="count" fill="#10B981" />
-          </BarChart>
+            <Legend 
+              verticalAlign="bottom" 
+              height={36}
+              formatter={(value) => (
+                <span style={{ color: '#9CA3AF' }}>{value}</span>
+              )}
+            />
+          </PieChart>
         </ResponsiveContainer>
       </div>
     </div>
@@ -131,39 +159,27 @@ const PreferenceStats: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-gray-800 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-white mb-6">user stats</h2>
+      <h2 className="text-2xl font-bold text-white mb-6">User Statistics</h2>
       
-      {/* Preference Statistics Chart */}
-      {renderBarChart(preferenceStats, "problem preference")}
+      {/* Preference Statistics Pie Chart */}
+      {renderPieChart(preferenceStats, "Problem Preferences")}
 
-      {/* Category Statistics Chart */}
-      {renderBarChart(categoryStats, "type")}
+      {/* Category Statistics Pie Chart */}
+      {renderPieChart(categoryStats, "Types of Submissions")}
 
       {/* User Registry Section */}
       <div className="mt-8">
-        <h3 className="text-xl font-bold text-white mb-4">User data scroll right</h3>
+        <h3 className="text-xl font-bold text-white mb-4">User Data (Scroll Right)</h3>
         <div className="overflow-x-auto">
           <table className="min-w-full bg-gray-900 rounded-lg overflow-hidden">
             <thead className="bg-gray-700">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  Date
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                email
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  preference
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                other
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-           type
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  Message
-                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Email</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Preference</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Other</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Type</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Message</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-700">
@@ -172,36 +188,26 @@ const PreferenceStats: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {user.createdAt.toDate().toLocaleDateString()}
                   </td>
-                 
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    {user.email}
-                  </td>
-                
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.email}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {categoryLabels[user.category] || user.category}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    {user.name}
-                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {preferenceLabels[user.preference] || user.preference}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-300">
-                    <div className="max-w-xs truncate">
-                      {user.message}
-                    </div>
+                    <div className="max-w-xs truncate">{user.message}</div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          
           {userData.map((user, index) => (
   <div key={index} className="px-6 py-4 text-2xl text-gray-300 max-h-40 overflow-y-auto">
     <div className="whitespace-pre-wrap break-words">{user.message}</div>
   </div>
 ))}
-
         </div>
       </div>
     </div>
