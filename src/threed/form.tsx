@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { noterFirestore, firebaseTimestamp } from '../firebase/index';
 import { Moon, Sun } from 'lucide-react';
+
+
+
 
 interface Option {
   value: string;
@@ -11,21 +14,24 @@ interface Option {
 interface FormData {
   name: string;
   // no: string;
-  email: string;
+  // email: string;
   message: string;
   preference: string;
   category: string;
+  ip:string;
 }
 
 const InputForm: React.FC = () => {
+  const [ip, setip] = useState<string | null>(null); // State for IP address
   const [darkMode, setDarkMode] = useState(true);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     // no: '',
-    email: '',
+    // email: '',
     message: '',
     preference: '',
-    category: ''
+    category: '',
+    ip:'',
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -54,13 +60,33 @@ const InputForm: React.FC = () => {
       [name]: value
     });
   };
+
+  useEffect(() => {
+    const fetchIpAddress = async () => {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        if (!response.ok) throw new Error('Primary IP API failed');
+        const data = await response.json();
+        setip(data.ip);
+        setFormData((prevData) => ({ ...prevData, ip: data.ip })); // Update formData with IP
+      } catch (err) {
+        console.error('Primary IP fetch failed:', err);
+        setip('Unknown');
+        setFormData((prevData) => ({ ...prevData, ip: 'Unknown' })); // Default to "Unknown"
+      }
+    };
+  
+    fetchIpAddress();
+  }, []);
+  
+
   const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
     setSuccessMessage(null);
-
+   
     try {
       const submissionsRef = noterFirestore.collection('submissions');
       await submissionsRef.add({
@@ -69,7 +95,7 @@ const InputForm: React.FC = () => {
       });
 
       setSuccessMessage('Your problem submitted successfully, now relax!');
-      setFormData({ name: '',email: '', message: '', preference: '', category: '' });//no:''
+      setFormData({ name: '',ip:'', message: '', preference: '', category: '' });//,no:'' ,email: ''
     } catch (err) {
       setError('Failed to submit the form: ' + (err as Error).message);
     } finally {
@@ -118,7 +144,7 @@ const InputForm: React.FC = () => {
         </h2>
         
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          {/* <div>
             <label htmlFor="email" className={`block mb-1  font-bold transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-black'
             }`}>
@@ -138,7 +164,7 @@ const InputForm: React.FC = () => {
             <p className='text-xs text-gray-400'>
               (just for checking the entry is authentic and not a spam and definitely will not be recorded and discarded after few hours of submission)
             </p>
-          </div>
+          </div> */}
 
           <div>
             <label className={`block font-bold m-2 transition-colors duration-300 ${
@@ -293,6 +319,10 @@ const InputForm: React.FC = () => {
           )}
         </form>
       </div>
+      <div className={`text-sm text-center mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+  {ip ? `.` : 'connecting'}
+</div>
+
     </div>
   );
 };

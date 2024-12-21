@@ -4,8 +4,8 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recha
 
 interface UserData {
   name: string;
-  no:string;
-  email: string;
+  ip:string;
+  // email: string;
   message: string;
   preference: string;
   category: string;
@@ -176,8 +176,8 @@ const PreferenceStats: React.FC = () => {
             <thead className="bg-gray-700">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Date</th>
-                {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Phone No.</th> */}
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Email</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">I.P Address</th>
+                {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Email</th> */}
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">type</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">problem</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Other</th>
@@ -191,8 +191,8 @@ const PreferenceStats: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {user.createdAt.toDate().toLocaleDateString()}
                   </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.no}</td> */}
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.email}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.ip}</td>
+                  {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.email}</td> */}
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {categoryLabels[user.category] || user.category}
                   </td>
