@@ -101,7 +101,8 @@ const App: FC = () => {
   return (<>
   
  
-    <div className="bg-black min-h-screen w-full">
+ 
+ 
 
       <ToastContainer
         position="top-right"
@@ -115,7 +116,7 @@ const App: FC = () => {
         pauseOnHover={false}
       />
       <RouterProvider router={router} />
-    </div>
+
     </>
   );
 };

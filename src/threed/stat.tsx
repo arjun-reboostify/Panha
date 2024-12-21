@@ -26,17 +26,19 @@ const PreferenceStats: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const preferenceLabels: { [key: string]: string } = {
-    'option1': 'Desktop Application',
-    'option2': 'Mobile Application',
-    'option3': 'Web Application',
-    'option4': 'Cross-platform Application'
+    'breakup_trauma': 'Breakup trauma or toxic relationship',
+    'financial_burden': 'Financial burden',
+    'family_disputes': 'Family disputes',
+    'harassment': 'Harassment or stalking related',
+    'lonely_overthinking': 'Lonely and overthinking',
+    'academics': 'Academics',
+    'other': 'Other',
   };
 
   const categoryLabels: { [key: string]: string } = {
-    'personal': 'Personal Use',
-    'business': 'Business Use',
-    'education': 'Educational Use',
-    'enterprise': 'Enterprise Use'
+    'personal': 'Request for advice',
+    'business': 'Rant',
+    'education': 'Confession',
   };
 
   useEffect(() => {
@@ -148,16 +150,16 @@ const PreferenceStats: React.FC = () => {
                   Date
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  Name
+                email
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  Email
+                  preference
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  Category
+                other
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                  Preference
+           type
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                   Message
@@ -170,14 +172,16 @@ const PreferenceStats: React.FC = () => {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {user.createdAt.toDate().toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    {user.name}
-                  </td>
+                 
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {user.email}
                   </td>
+                
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {categoryLabels[user.category] || user.category}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                    {user.name}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
                     {preferenceLabels[user.preference] || user.preference}
