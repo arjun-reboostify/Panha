@@ -14,7 +14,12 @@ import Register from "./components/Register";
 import { noterAuth } from "./firebase";
 import { ToastContainer } from "react-toastify";
 import Reddit from './components/reddit'
-
+import Landing from './land/c'
+import C from './land/choices'
+import Fom from './threed/form'
+import Stat from './threed/stat'
+import Premium from './threed/premiumaccess'
+import {PremiumRoute} from './threed/premiumroute'
 // Protected Route Component
 const ProtectedRoute = () => {
   const [user, loading, error] = useAuthState(noterAuth);
@@ -31,7 +36,7 @@ const ProtectedRoute = () => {
 
 
   if (!user) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/welcome" state={{ from: location }} />;
   }
 
 
@@ -44,10 +49,8 @@ const PublicRoute = () => {
   const location = useLocation();
   const from = (location.state as { from?: { pathname: string } })?.from?.pathname || '/';
 
-  if (user) {
-   
-    return <Navigate to={from} />;
-  }
+
+
 
  
 
@@ -61,7 +64,7 @@ const router = createBrowserRouter([
     children: [
       
       { path: "/", element: <Reddit /> },
-     
+    
     ]
   },
   {
@@ -70,6 +73,23 @@ const router = createBrowserRouter([
     children: [
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
+      { path: "welcome", element: <Landing /> },
+      { path: "form", element: <Fom /> },
+      {path: "stat",
+
+      element: (
+  
+       <PremiumRoute>
+  
+         <Stat />
+  
+       </PremiumRoute>
+  
+      ) 
+  
+     },
+     
+      { path: "accesss", element: <Premium /> },
     
     ]
   },
