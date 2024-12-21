@@ -11,7 +11,7 @@ export const PremiumRoute: React.FC<{children: React.ReactNode}> = ({ children }
   
 
   if (!isPremium) {
-    toast.warning('Premium access required');
+    toast.warning('admin access required');
     return <Navigate to="/accesss" />;
   }
 

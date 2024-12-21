@@ -12,7 +12,7 @@ const PremiumAccess: React.FC = () => {
 
   // Check for existing premium status on component mount
   useEffect(() => {
-    const storedPremiumStatus = localStorage.getItem('premiumAccess');
+    const storedPremiumStatus = localStorage.getItem('adminAccess');
     if (storedPremiumStatus === 'true') {
       setIsPremium(true);
     }
@@ -22,13 +22,13 @@ const PremiumAccess: React.FC = () => {
     // Simple premium code validation (replace with your preferred logic)
     if (premiumCode.trim() === 'admin@1234') {
       setIsPremium(true);
-      localStorage.setItem('premiumAccess', 'true');
-      toast.success('Premium access granted!');
+      localStorage.setItem('adminAccess', 'true');
+      toast.success('admin access granted!');
       
       // Redirect to home or a specific premium page
       navigate('/');
     } else {
-      toast.error('Invalid premium code');
+      toast.error('Invalid admin code');
       setIsPremium(false);
     }
   };
@@ -37,7 +37,7 @@ const PremiumAccess: React.FC = () => {
   return (<><Side />
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-6">
-        <h2 className="text-2xl font-bold mb-6 text-center">Premium Access</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Admin Access</h2>
         
      
 
@@ -49,7 +49,7 @@ const PremiumAccess: React.FC = () => {
                 value={premiumCode}
                 onChange={(e) => setPremiumCode(e.target.value)}
                 placeholder="Enter 12-digit premium code" 
-                maxLength={10}
+              
                 className="w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
