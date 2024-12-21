@@ -100,7 +100,7 @@ Panha
             value={formData.email}
             onChange={handleInputChange}
             className="w-full px-4 py-2 bg-gray-100 text-black rounded-lg focus:ring-2 focus:ring-green-500"
-            required
+          
           /><p className='text-gray-400'>(just for checking the entry is authentic and not a spam and definitely will not be recorded and discarded after few hours of submission)</p>
         </div>
         <div>
