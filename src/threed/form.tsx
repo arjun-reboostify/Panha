@@ -218,7 +218,7 @@ const InputForm: React.FC = () => {
             <label htmlFor="message" className={`block mb-1 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-black'
             }`}>
-              Message
+             Pour your heart out. It's completely anonymous
             </label>
             <textarea
               id="message"
