@@ -23,7 +23,7 @@ interface FormData {
 
 const InputForm: React.FC = () => {
   const [ip, setip] = useState<string | null>(null); // State for IP address
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     // no: '',
@@ -128,7 +128,7 @@ const InputForm: React.FC = () => {
       </div>
 
       <div className={`max-w-2xl mx-auto p-6 rounded-lg shadow-lg transition-colors duration-300 ${
-        darkMode ? 'bg-black' : 'bg-white'
+        darkMode ? 'bg-black' : 'bg-blue-200'
       }`}>
         <div className='flex justify-center items-center'>
           <img src="/logo.jpg" className="h-10 w-10" />
@@ -165,7 +165,25 @@ const InputForm: React.FC = () => {
               (just for checking the entry is authentic and not a spam and definitely will not be recorded and discarded after few hours of submission)
             </p>
           </div> */}
-
+<div>
+            <label htmlFor="message" className={`block  font-bold  mb-1 transition-colors duration-300 ${
+              darkMode ? 'text-white' : 'text-black'
+            }`}>
+             Pour your heart out. It's completely anonymous
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+              className={`w-full px-4 py-2 rounded-lg focus:ring-2 focus:ring-green-500 resize-none transition-colors duration-300 ${
+                darkMode ? 'bg-gray-900 text-white' : 'bg-blue-100 text-2xl text-black'
+              }`}
+              placeholder='write .......'
+              rows={4}
+              required
+            />
+          </div>
           <div>
             <label className={`block font-bold m-2 transition-colors duration-300 ${
               darkMode ? 'text-white' : 'text-black'
@@ -178,7 +196,7 @@ const InputForm: React.FC = () => {
                   key={option.value}
                   htmlFor={option.value}
                   className={`flex items-center cursor-pointer p-2 rounded-lg transition-colors duration-300 ${
-                    darkMode ? 'bg-gray-900 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'
+                    darkMode ? 'bg-gray-900 hover:bg-gray-600' : 'bg-blue-100 hover:bg-gray-200'
                   }`}
                 >
                   <input
@@ -214,8 +232,8 @@ const InputForm: React.FC = () => {
               name="name"
               value={formData.name}
               onChange={handleInputChange}
-              className={`w-full px-4 py-2 rounded-lg focus:ring-2 focus:ring-green-500 transition-colors duration-300 ${
-                darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'
+              className={`w-full px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 transition-colors duration-300 ${
+                darkMode ? 'bg-gray-900 text-white' : 'bg-blue-100 text-black'
               }`}
             />
           </div>
@@ -245,25 +263,7 @@ const InputForm: React.FC = () => {
             </select>
           </div>
 
-          <div>
-            <label htmlFor="message" className={`block  font-bold  mb-1 transition-colors duration-300 ${
-              darkMode ? 'text-white' : 'text-black'
-            }`}>
-             Pour your heart out. It's completely anonymous
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleInputChange}
-              className={`w-full px-4 py-2 rounded-lg focus:ring-2 focus:ring-green-500 resize-none transition-colors duration-300 ${
-                darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'
-              }`}
-              placeholder='write your thoughts openly .......'
-              rows={4}
-              required
-            />
-          </div>
+          
           {/* <div>
   <label
     htmlFor="no"
