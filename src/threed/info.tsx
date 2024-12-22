@@ -4,26 +4,37 @@ import { Facebook, Twitter, Instagram,MessageCircle, Linkedin } from 'lucide-rea
 
 const SocialQuoteComponent = () => {
     
-        const links = [
-          {
-            text: "WhatsApp Group:",
-            icon: MessageCircle,
-            label: " Click Here",
-            href: "https://chat.whatsapp.com/BLikt4WP0yt2AG1paLIRFA"
-          },
-          {
-            text: "Instagram:",
-            icon: Instagram,
-            label: "Click Here",
-            href: "https://www.instagram.com/panhamentalhealth/profilecard/"
-          },
-          {
-            text: "LinkedIn:",
-            icon: Linkedin,
-            label: "Click Here",
-            href: "https://www.linkedin.com/company/your-panha/"
-          }
-        ];
+  const links = [
+    {
+      text: "WhatsApp Group:",
+      icon: MessageCircle,
+      label: "Click Here",
+      href: "https://chat.whatsapp.com/BLikt4WP0yt2AG1paLIRFA",
+      bgColor: "bg-green-600",
+    },
+    {
+      text: "Instagram official:",
+      icon: Instagram,
+      label: "Click Here",
+      href: "https://www.instagram.com/panha.co.in?igsh=MXIxa2U1aG5qdGN4dA==",
+      bgColor: "bg-pink-600",
+    },
+    {
+      text: "Instagram confessions:",
+      icon: Instagram,
+      label: "Click Here",
+      href: "https://www.instagram.com/panha.co.in?igsh=MXIxa2U1aG5qdGN4dA==",
+      bgColor: "bg-purple-600",
+    },
+    {
+      text: "LinkedIn:",
+      icon: Linkedin,
+      label: "Click Here",
+      href: "https://www.linkedin.com/company/your-panha/",
+      bgColor: "bg-blue-600",
+    },
+  ];
+  
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-black via-blue-900 to-black text-center items-center justify-between">
       {/* Heading */}
@@ -36,11 +47,12 @@ const SocialQuoteComponent = () => {
 
       {/* Quote */}
       <main className="flex-grow flex flex-col items-center justify-center space-y-8">
-        <blockquote
-          className="text-2xl italic text-white px-8 max-w-xl animate-fadeIn"
-        >
-      "You're not alone. We've got your back, no matter what."
-        </blockquote>
+      <blockquote
+  className="text-2xl italic text-white px-8 max-w-xl animate-fadeIn"
+>
+  <span className="font-bold text-yellow-300">Mission:</span> To provide compassionate counseling and support for individuals facing depression, trauma, and emotional challenges.
+</blockquote>
+
 
         {/* Timing Schedule */}
         <div className="shadow-2xl rounded-lg p-6 bg-black w-full max-w-xl transform hover:scale-105 transition-transform duration-500">
@@ -83,7 +95,7 @@ const SocialQuoteComponent = () => {
       </main> <blockquote
           className="text-2xl italic text-white m-10 px-8 max-w-xl animate-fadeIn"
         >
-   Yha bina judge Kiye aapko sunna jata hai....
+  Yaha bina judge kiye aapko sunna jayega and aapki problem solve hogi
 
         </blockquote>
 
@@ -92,7 +104,9 @@ const SocialQuoteComponent = () => {
   <table className="table-auto border-4 border-gray-800 bg-transparent w-full">
     <thead className="bg-black text-white">
       <tr>
-        <th className="px-6 py-3 text-lg font-bold">Toh Deri Kis Baat ki Join the Revolution Now!!!</th>
+        <th className="px-6 py-3 text-lg font-bold">
+          Toh Deri Kis Baat ki Join the Revolution Now!!!
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -106,9 +120,9 @@ const SocialQuoteComponent = () => {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-y-2 px-10 py-1 bg-blue-900  rounded-lg transition-all duration-200 text-gray-300 hover:text-white animate-bounce"
+              className={`flex items-center space-y-2 px-10 py-1 ${link.bgColor} rounded-lg transition-all duration-200  text-white animate-bounce`}
             >
-              <link.icon className='font-bold' size={40} />
+              <link.icon className="font-bold" size={40} />
               <span className="text-2xl font-bold mx-4">{link.label}</span>
             </a>
           </td>
@@ -117,7 +131,6 @@ const SocialQuoteComponent = () => {
     </tbody>
   </table>
 </div>
-
       
 
 
