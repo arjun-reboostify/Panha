@@ -48,7 +48,7 @@ const SocialQuoteComponent = () => {
       {/* Quote */}
       <main className="flex-grow flex flex-col items-center justify-center space-y-8">
       <blockquote
-  className="text-xl italic w-full text-white  animate-fadeIn"
+  className="text-[1.2rem] italic w-full text-white  animate-fadeIn"
 >
   <span className="font-bold text-yellow-300">Mission:</span> To provide compassionate counseling and support for individuals facing depression, trauma, and emotional challenges.
 </blockquote>
@@ -93,7 +93,7 @@ const SocialQuoteComponent = () => {
 
         </div>
       </main> <p
-          className="text-2xl italic text-white mt-5 mb-5  animate-fadeIn"
+          className="text-2xl text-[1.4rem] text-white mt-5 mb-5  animate-fadeIn"
         >
   Yaha bina judge kiye aapko sunna jayega and aapki problem solve hogi
 
