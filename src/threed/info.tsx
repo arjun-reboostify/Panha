@@ -64,7 +64,7 @@ const SocialQuoteComponent = () => {
     <thead>
       <tr className=" bg-transparent text-white">
         <th className="border border-white px-6 py-3"></th>
-        <th className="border border-white px-6 py-3">Details</th>
+        <th className="border text-xl border-white px-6 py-3">Details</th>
       </tr>
     </thead>
     <tbody>
