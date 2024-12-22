@@ -48,7 +48,7 @@ const SocialQuoteComponent = () => {
       {/* Quote */}
       <main className="flex-grow flex flex-col items-center justify-center space-y-8">
       <blockquote
-  className="text-2xl italic text-white px-8 max-w-xl animate-fadeIn"
+  className="text-xl italic w-full text-white  animate-fadeIn"
 >
   <span className="font-bold text-yellow-300">Mission:</span> To provide compassionate counseling and support for individuals facing depression, trauma, and emotional challenges.
 </blockquote>
@@ -63,8 +63,8 @@ const SocialQuoteComponent = () => {
   <table className="w-full table-auto border-collapse border  border-black text-left">
     <thead>
       <tr className=" bg-transparent text-white">
-        <th className="border border-black px-6 py-3"></th>
-        <th className="border border-black px-6 py-3">Details</th>
+        <th className="border border-white px-6 py-3"></th>
+        <th className="border border-white px-6 py-3">Details</th>
       </tr>
     </thead>
     <tbody>
@@ -92,12 +92,12 @@ const SocialQuoteComponent = () => {
 </div>
 
         </div>
-      </main> <blockquote
-          className="text-2xl italic text-white m-10 px-8 max-w-xl animate-fadeIn"
+      </main> <p
+          className="text-2xl italic text-white mt-5 mb-5  animate-fadeIn"
         >
   Yaha bina judge kiye aapko sunna jayega and aapki problem solve hogi
 
-        </blockquote>
+        </p>
 
       {/* Bouncing Links with Labels */}
       <div className="flex flex-col items-center space-y-8 z-10">
