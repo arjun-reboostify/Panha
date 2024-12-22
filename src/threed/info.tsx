@@ -23,7 +23,7 @@ const SocialQuoteComponent = () => {
       text: "Instagram confessions:",
       icon: Instagram,
       label: "Click Here",
-      href: "https://www.instagram.com/panha.co.in?igsh=MXIxa2U1aG5qdGN4dA==",
+      href: "https://www.instagram.com/yourpanha/#",
       bgColor: "bg-purple-600",
     },
     {
