@@ -299,7 +299,7 @@ const InputForm: React.FC = () => {
             }`}
             disabled={isLoading}
           >
-            {isLoading ? 'Submitting...' : 'Submit'}
+            {isLoading ? 'Sending...' : 'Send !!!'}
           </button>
 
           {error && (
