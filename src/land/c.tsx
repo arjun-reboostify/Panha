@@ -195,9 +195,9 @@ const LandingPage = () => {
 <div className="max-w-screen-lg mx-auto p-6">
   <header className="text-center mb-8">
     <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-      Main Heading
+     Help Is Available
     </h1>
-    <p className="text-lg sm:text-xl text-gray-500">Subheading for this section</p>
+    <p className="text-lg sm:text-xl text-gray-500">we understand , we care</p>
   </header>
 
   <div className="space-y-8"> {/* Vertical spacing between items */}
