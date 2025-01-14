@@ -165,21 +165,21 @@ const LandingPage = () => {
   const items: Item[] = [
     {
       id: 1,
-      title: "Item 1",
-      imageSrc: "/logo.jpg",
-      description: "This is a description for item 1."
+      title: "BUDDY",
+      imageSrc: "/buddy.png",
+      description: "bla bla"
     },
     {
       id: 2,
-      title: "Item 2",
-      imageSrc: "/logo.jpg",
-      description: "This is a description for item 2."
+      title: "ANONYMOUS CHAT",
+      imageSrc: "/chat.png",
+      description: "lorem ipsum "
     },
     {
       id: 3,
-      title: "Item 3",
-      imageSrc: "/logo.jpg",
-       description: "This is a description for item 3."
+      title: "COUNSELLING",
+      imageSrc: "/counselling.png",
+       description: "test test its my subject"
     }
   ];
  
@@ -206,14 +206,14 @@ const LandingPage = () => {
         key={item.id}
         className="bg-transparent border border-gray-300 p-4 rounded-lg shadow-lg"
       >
-        <h2 className="text-xl font-semibold mb-4">{item.title}</h2> {/* Title above image and text */}
+        <h2 className="text-4xl font-bold text-blue-600 mb-4">{item.title}</h2> {/* Title above image and text */}
         <div className="flex space-x-4 sm:space-x-6">
           <img
             src={item.imageSrc}
             alt={item.title}
             className="w-24 h-24 object-cover rounded-md sm:w-32 sm:h-32"
           />
-          <p className="text-gray-700 sm:text-lg">{item.description}</p>
+          <p className="text-gray-700 text-2xl sm:text-lg">{item.description}</p>
         </div>
       </div>
     ))}
