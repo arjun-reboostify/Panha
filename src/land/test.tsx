@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'; 
 import { 
-  Home, 
+ NotebookPen,
   Book, 
   Users, 
   Settings, 
@@ -23,7 +23,7 @@ const NavBar = () => {
   const mobileMenuButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const navItems = [
-    { icon: Home, path: '/form', label: 'Form' },
+    { icon: NotebookPen, path: '/form', label: 'Form' },
     { icon: Book, path: '/login', label: 'Login' },
     { icon: Users, path: '/register', label: 'Signup' },
   ];
