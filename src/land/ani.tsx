@@ -5,39 +5,55 @@ import { ArrowUpRight, Layers, Zap, Database } from 'lucide-react';
 const ScrollSectionAnimation = () => {
   const { scrollYProgress } = useViewportScroll();
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-  
+
   const animationRange = isMobile ? [0, 0.8] : [0, 0.6];
-  
-  // Restored original animations
+
+  // Slow down the scroll by scaling the scroll speed using a custom scroll handler
+  useEffect(() => {
+    const handleScroll = (event: WheelEvent) => {
+      event.preventDefault(); // Prevent the default scroll action
+      const scrollSpeed = 0.3; // Slow down factor (0.5 = half the speed)
+      const scrollAmount = event.deltaY * scrollSpeed; // Adjust scroll speed
+      window.scrollBy(0, scrollAmount); // Move the page by the adjusted amount
+    };
+
+    // Listen for wheel event and apply the scroll slowdown
+    window.addEventListener('wheel', handleScroll, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, []);
+
+  // Animation transforms based on scrollYProgress
   const topLeftX = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [0, 500, isMobile ? 500 : 750]);
   const topLeftY = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [0, 250, isMobile ? 250 : 350]);
   const topLeftScale = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [1, 0.98, 1]);
   const topLeftRotate = useTransform(scrollYProgress, animationRange, [0, 0]);
-  
+
   const topRightX = useTransform(scrollYProgress, [0, 0.4, animationRange[1]], [0, 500, isMobile ? 750 : 1000]);
   const topRightRotate = useTransform(scrollYProgress, animationRange, [0, -18.75]);
   const topRightOpacity = useTransform(scrollYProgress, [0, 0.4, animationRange[1]], [1, 0.5, 0]);
-  
-  
-  const bottomLeftX = useTransform(scrollYProgress, [0, 0.2, animationRange[1]], [-500, 100, 0]);
+
+  const bottomLeftX = useTransform(scrollYProgress, [0, 0, animationRange[1]], [-500, 100, 10]);
   const bottomLeftRotate = useTransform(scrollYProgress, animationRange, [-18.75, 0]);
   const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.2, animationRange[1]], [0, 0.5, 1]);
 
   const cardBaseStyle = "relative max-w-full h-full";
-  
+
   return (
-    <div 
-      className={`min-h-screen ${isMobile ? 'h-[170vh] overflow-hidden' : 'h-[200vh]'} relative `}
+    <div
+      className={`min-h-screen ${isMobile ? 'h-[170vh] overflow-hidden' : 'h-[200vh]'} relative`}
       style={{
         background: `url('') no-repeat center center fixed`,
         backgroundSize: 'cover'
@@ -47,7 +63,7 @@ const ScrollSectionAnimation = () => {
         <div className="absolute inset-0" />
         <div className="grid grid-cols-1 md:grid-cols-2 auto-rows-auto md:grid-rows-2 h-full relative">
           {/* Top Left Card */}
-          <motion.div 
+          <motion.div
             className={`${cardBaseStyle} bg-transparent ${isMobile ? 'h-1/2' : 'h-full'}`}
             style={{
               x: topLeftX,
@@ -57,7 +73,7 @@ const ScrollSectionAnimation = () => {
               zIndex: 10,
             }}
           >
-           <img 
+            <img
               src="/panhalady.png"
               alt="Feature visual"
               className="w-full h-full object-cover"
@@ -65,7 +81,7 @@ const ScrollSectionAnimation = () => {
           </motion.div>
 
           {/* Top Right Card */}
-          <motion.div 
+          <motion.div
             className={`${cardBaseStyle} bg-transparent flex flex-col items-center justify-center ${isMobile ? 'h-1/2 mt-4' : 'h-full'}`}
             style={{
               x: topRightX,
@@ -90,7 +106,7 @@ const ScrollSectionAnimation = () => {
           </motion.div>
 
           {/* Bottom Left Card */}
-          <motion.div 
+          <motion.div
             className={`${cardBaseStyle} bg-transparent ${isMobile ? 'col-span-1' : ''}`}
             style={{
               x: bottomLeftX,
