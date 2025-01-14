@@ -28,13 +28,7 @@ const ScrollSectionAnimation = () => {
   const topRightRotate = useTransform(scrollYProgress, animationRange, [0, -18.75]);
   const topRightOpacity = useTransform(scrollYProgress, [0, 0.4, animationRange[1]], [1, 0.5, 0]);
   
-  const bottomLeftY = useTransform(scrollYProgress, [0, 0.2, animationRange[1]], [
-  isMobile ? 100 : 250, // For mobile, start at a different Y position
-  isMobile ? 50 : 200,   // Adjust the final Y position for mobile
-  0,  // Final Y position
-]);
-
-
+  
   const bottomLeftX = useTransform(scrollYProgress, [0, 0.2, animationRange[1]], [-500, 100, 0]);
   const bottomLeftRotate = useTransform(scrollYProgress, animationRange, [-18.75, 0]);
   const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.2, animationRange[1]], [0, 0.5, 1]);
@@ -43,7 +37,7 @@ const ScrollSectionAnimation = () => {
   
   return (
     <div 
-      className={`min-h-screen ${isMobile ? 'h-[250vh]' : 'h-[200vh]'} relative`}
+      className={`min-h-screen ${isMobile ? 'h-[170vh] overflow-hidden' : 'h-[200vh]'} relative `}
       style={{
         background: `url('') no-repeat center center fixed`,
         backgroundSize: 'cover'
