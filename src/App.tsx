@@ -21,6 +21,7 @@ import Stat from './threed/stat'
 import Premium from './threed/premiumaccess'
 import {PremiumRoute} from './threed/premiumroute'
 import Info from './threed/info'
+
 // Protected Route Component
 const ProtectedRoute = () => {
   const [user, loading, error] = useAuthState(noterAuth);
@@ -77,6 +78,7 @@ const router = createBrowserRouter([
       { path: "welcome", element: <Landing /> },
       { path: "form", element: <Fom /> },
       { path: "info", element: <Info /> },
+  
       {path: "stat",
 
       element: (
@@ -104,7 +106,10 @@ const App: FC = () => {
   
  
  
- 
+  <div 
+      className=" bg-cover bg-center"
+      style={{ backgroundImage: 'url(/bg.jpg)' }}
+    >
 
       <ToastContainer
         position="top-right"
@@ -118,7 +123,7 @@ const App: FC = () => {
         pauseOnHover={false}
       />
       <RouterProvider router={router} />
-
+</div>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Ani from './ani'
 import E from './assets/a.jpg'
 import { 
   Home, 
@@ -25,6 +26,12 @@ import Nav from './test'
 import Contact from './Contactform'
 import Hero from './hero'
 
+type Item = {
+  id: number;
+  title: string;
+  imageSrc: string;
+  description: string;
+};
 const LandingPage = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
 
@@ -155,11 +162,70 @@ const LandingPage = () => {
 
 
   
-  
+  const items: Item[] = [
+    {
+      id: 1,
+      title: "Item 1",
+      imageSrc: "/logo.jpg",
+      description: "This is a description for item 1."
+    },
+    {
+      id: 2,
+      title: "Item 2",
+      imageSrc: "/logo.jpg",
+      description: "This is a description for item 2."
+    },
+    {
+      id: 3,
+      title: "Item 3",
+      imageSrc: "/logo.jpg",
+       description: "This is a description for item 3."
+    }
+  ];
  
-  return (<><Nav /><Hero />
-    <div className="min-h-screen bg-gray-50 relative">
+  return (<><Nav />
+   <div className="h-[10vh] invisible">
+      {/* This div is 20vh tall but invisible */}
+    </div>
+    <Ani />
+    <div className="h-[15vh] bg-black p-5 flex items-center justify-center">
+  <span className="text-white text-3xl sm:text-4xl md:text-5xl underline">Our Services</span>
+</div>
+
+<div className="max-w-screen-lg mx-auto p-6">
+  <header className="text-center mb-8">
+    <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+      Main Heading
+    </h1>
+    <p className="text-lg sm:text-xl text-gray-500">Subheading for this section</p>
+  </header>
+
+  <div className="space-y-8"> {/* Vertical spacing between items */}
+    {items.map((item) => (
+      <div
+        key={item.id}
+        className="bg-transparent border border-gray-300 p-4 rounded-lg shadow-lg"
+      >
+        <h2 className="text-xl font-semibold mb-4">{item.title}</h2> {/* Title above image and text */}
+        <div className="flex space-x-4 sm:space-x-6">
+          <img
+            src={item.imageSrc}
+            alt={item.title}
+            className="w-24 h-24 object-cover rounded-md sm:w-32 sm:h-32"
+          />
+          <p className="text-gray-700 sm:text-lg">{item.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+
     
+    
+    {/* <Hero />
+    <div className="min-h-screen bg-gray-50 relative">
+     */}
 
   
 
@@ -258,10 +324,10 @@ const LandingPage = () => {
         </div>
       </section> */}
 
-      <Contact />
+      {/* <Contact /> */}
 
       {/* Footer with Social Links */}
-      <footer className="bg-gray-900 text-white py-8">
+      {/* <footer className="bg-gray-900 text-white py-8">
         <div className="container mx-auto flex justify-between items-center">
           <p>© 2024 Panha. All Rights Reserved.</p>
           <div className="flex space-x-4">
@@ -279,7 +345,8 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
-    </div></>
+    </div> */}
+    </>
   );
 };
 
