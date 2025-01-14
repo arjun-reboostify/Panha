@@ -45,7 +45,7 @@ const ScrollSectionAnimation = () => {
   const topRightRotate = useTransform(scrollYProgress, animationRange, [0, -18.75]);
   const topRightOpacity = useTransform(scrollYProgress, [0, 0.4, animationRange[1]], [1, 0.5, 0]);
 
-  const bottomLeftX = useTransform(scrollYProgress, [0, 0.2, animationRange[1]], [-500, 100, 10]); // Start earlier
+  const bottomLeftX = useTransform(scrollYProgress, [0, 0, animationRange[1]], [-500, 100, 10]); // Start earlier
 const bottomLeftRotate = useTransform(scrollYProgress, animationRange, [-18.75, 0]);
 const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.1, animationRange[1]], [0, 1, 1]); // Start with opacity 1 earlier
 
