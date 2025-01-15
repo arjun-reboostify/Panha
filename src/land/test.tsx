@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { UserCheck,User2Icon,WorkflowIcon,Info,NotebookPen, Book, Users, Menu, X, Home, Settings, HelpCircle, Mail, Share,ChevronUp,ChevronDown, Bell, User, FileText, Calendar, Phone,BookA,Lock,CircleArrowOutDownRightIcon,HelpCircleIcon ,Contact} from 'lucide-react';
+import { UserCheck,User2Icon,WorkflowIcon,Info, Menu, X, Home,ChevronUp,ChevronDown, Phone,BookA,Lock,CircleArrowOutDownRightIcon,HelpCircleIcon ,Contact} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -119,9 +119,8 @@ const NavBar = () => {
     <motion.button
       onClick={() => isMobile ? setIsMobileMenuOpen(!isMobileMenuOpen) : setIsDesktopMenuOpen(!isDesktopMenuOpen)}
       whileTap={{ scale: 0.9 }}
-      className={`bg-white text-blue-500 p-2 rounded-full shadow-lg z-50 ${
-        isMobile ? 'fixed top-1 right-1 md:hidden' : 'hidden md:block'
-      }`}
+      className={`bg-white text-blue-500 p-2 rounded-full shadow-lg z-50 
+        fixed top-1 right-1 `}
       ref={menuButtonRef}
     >
       {(isMobile ? isMobileMenuOpen : isDesktopMenuOpen) ? (
@@ -300,7 +299,7 @@ const NavBar = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="fixed top-0 right-0 w-full bg-transparent z-40 hidden md:block"
+        className="fixed top-0 left-0 w-full bg-transparent z-40 hidden md:block"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
