@@ -16,44 +16,29 @@ const ScrollSectionAnimation = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const animationRange = isMobile ? [0, 0.8] : [0, 0.6];
+  // Ultra-short animation range to trigger quickly
+  const animationRange = isMobile ? [0, 0.15] : [0, 0.12];
 
-  // Slow down the scroll by scaling the scroll speed using a custom scroll handler
-  useEffect(() => {
-    const handleScroll = (event: WheelEvent) => {
-      event.preventDefault(); // Prevent the default scroll action
-      const scrollSpeed = 0.2; // Slow down factor (0.5 = half the speed)
-      const scrollAmount = event.deltaY * scrollSpeed; // Adjust scroll speed
-      window.scrollBy(0, scrollAmount); // Move the page by the adjusted amount
-    };
+  // Quick-trigger transforms with early completion points
+  const topLeftX = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [0, 750, isMobile ? 500 : 900]);
+  const topLeftY = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [0, 250, isMobile ? 250 : 350]);
+  const topLeftScale = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [1, 0.98, 1]);
+  const topLeftRotate = useTransform(scrollYProgress, [0, animationRange[1]], [0, 0]);
 
-    // Listen for wheel event and apply the scroll slowdown
-    window.addEventListener('wheel', handleScroll, { passive: false });
+  const topRightX = useTransform(scrollYProgress, [0, 0.08, animationRange[1]], [0, 500, isMobile ? 750 : 1000]);
+  const topRightRotate = useTransform(scrollYProgress, [0, animationRange[1]], [0, -5]);
+  const topRightOpacity = useTransform(scrollYProgress, [0, 0.08, animationRange[1]], [1, 0.9, 1]);
 
-    return () => {
-      window.removeEventListener('wheel', handleScroll);
-    };
-  }, []);
+  // Enhanced bottom left animations for dramatic entrance
+  const bottomLeftX = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [-200, 0, 0]);
+  const bottomLeftRotate = useTransform(scrollYProgress, [0, animationRange[1]], [-10, 0]);
+  const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [0, 1, 1]);
 
-  // Animation transforms based on scrollYProgress
-  const topLeftX = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [0,750, isMobile ? 500 : 900]);
-  const topLeftY = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [0, 250, isMobile ? 250 : 350]);
-  const topLeftScale = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [1, 0.98, 1]);
-  const topLeftRotate = useTransform(scrollYProgress, animationRange, [0, 0]);
-
-  const topRightX = useTransform(scrollYProgress, [0, 0.4, animationRange[1]], [0, 500, isMobile ? 750 : 1000]);
-  const topRightRotate = useTransform(scrollYProgress, animationRange, [0, -18.75]);
-  const topRightOpacity = useTransform(scrollYProgress, [0, 0.4, animationRange[1]], [1, 0.5, 0]);
-
-  const bottomLeftX = useTransform(scrollYProgress, [0, 0, animationRange[1]], [-100, 30, 0]); // Start earlier
-const bottomLeftRotate = useTransform(scrollYProgress, animationRange, [-10, 5]);
-const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.1, animationRange[1]], [0, 1, 1]); // Start with opacity 1 earlier
-
-  const cardBaseStyle = "relative max-w-full h-full";
+  const cardBaseStyle = "relative max-w-full h-full transition-all duration-200"; // Faster transition
 
   return (
     <div
-      className={`min-h-screen ${isMobile ? 'h-[170vh] overflow-hidden' : 'h-[200vh]'} relative`}
+      className={`min-h-screen ${isMobile ? 'h-[150vh] overflow-hidden' : 'h-[130vh]'} relative`} // Even shorter scroll height
       style={{
         background: `url('') no-repeat center center fixed`,
         backgroundSize: 'cover'
@@ -72,6 +57,9 @@ const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.1, animationRange[
               rotate: topLeftRotate,
               zIndex: 10,
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
           >
             <img
               src="/panhalady.png"
@@ -88,6 +76,9 @@ const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.1, animationRange[
               rotate: topRightRotate,
               opacity: topRightOpacity,
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
           >
             <div className="text-center border-t border-b border-black sm:border-0 md:border-0 lg:border-t lg:border-b lg:border-black">
               <p className="text-2xl font-bold text-blue-600 p-4 sm:text-4xl md:text-4xl">
@@ -112,6 +103,13 @@ const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.1, animationRange[
               x: bottomLeftX,
               rotate: bottomLeftRotate,
               opacity: bottomLeftOpacity,
+            }}
+            initial={{ opacity: 0, x: -200, rotate: -10 }}
+            animate={{ opacity: 1, x: 0, rotate: 0 }}
+            transition={{ 
+              duration: 0.4,
+              delay: 0.2,
+              ease: "easeOut"
             }}
           >
             <div className="p-6">
