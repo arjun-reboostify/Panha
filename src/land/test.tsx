@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { NotebookPen, Book, Users, Menu, X, Home, Settings, HelpCircle, Mail, Share,ChevronUp,ChevronDown, Bell, User, FileText, Calendar, Phone } from 'lucide-react';
+import { UserCheck,User2Icon,WorkflowIcon,Info,NotebookPen, Book, Users, Menu, X, Home, Settings, HelpCircle, Mail, Share,ChevronUp,ChevronDown, Bell, User, FileText, Calendar, Phone,BookA,Lock,CircleArrowOutDownRightIcon,HelpCircleIcon ,Contact} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -26,60 +26,45 @@ const NavBar = () => {
   const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  // Mobile Toggle Menu Items
+  const mobileToggleItems: NavItem[] = [
+    { icon: Home, path: '/', label: 'Home' },
+    { icon: Info, path: '/', label: 'About' },
+    { icon: WorkflowIcon, path: '/', label: 'Our Service' },
+    { icon: User2Icon, path: '/', label: 'Our Team' },
+    { icon: UserCheck, path: '/', label: 'Experts' },
+    { icon: Phone, path: '/', label: 'Request a Call' },
+    { icon: BookA, path: '/', label: 'Resources' },
+    { icon: Lock, path: '/', label: 'Data Security' },
+    { icon: HelpCircleIcon, path: '/', label: 'Help' },
+    { icon: Contact, path: '/', label: 'Contact Us' },
+    { icon: CircleArrowOutDownRightIcon, path: '/', label: 'Terms and Conditions' },
+  
+    
+  ];
 
   // Top Navigation Items
   const topNavItems: NavItem[] = [
     { icon: Home, path: '/', label: 'Home' },
-    { icon: NotebookPen, path: '/form', label: 'Form' },
-    { icon: Book, path: '/login', label: 'Login' },
+    { icon: Info, path: '/', label: 'About' },
+    { icon: WorkflowIcon, path: '/', label: 'Our Service' },
   ];
 
   // Desktop Toggle Menu Items
   const desktopToggleItems: NavItem[] = [
-    { icon: Bell, path: '/notifications', label: 'Notifications' },
-    { icon: Calendar, path: '/calendar', label: 'Calendar' },
-    { icon: FileText, path: '/documents', label: 'Documents' },
-    { icon: Settings, path: '/settings', label: 'Settings' },
-    { icon: User, path: '/profile', label: 'Profile' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-  ];
-
-  // Mobile Toggle Menu Items
-  const mobileToggleItems: NavItem[] = [
     { icon: Home, path: '/', label: 'Home' },
-    { icon: Phone, path: '/contact', label: 'Contact' },
-    { icon: HelpCircle, path: '/help', label: 'Help Center' },
-    { icon: Users, path: '/users', label: 'Users' },
-    { icon: Mail, path: '/mail', label: 'Messages' },
-    { icon: Bell, path: '/notifications', label: 'Notifications' },
-    { icon: Calendar, path: '/calendar', label: 'Calendar' },
-    { icon: FileText, path: '/documents', label: 'Documents' },
-    { icon: Settings, path: '/settings', label: 'Settings' },
-    { icon: User, path: '/profile', label: 'Profile' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
-    { icon: Share, path: '/share', label: 'Share' },
+    { icon: Info, path: '/', label: 'About' },
+    { icon: WorkflowIcon, path: '/', label: 'Our Service' },
+    { icon: User2Icon, path: '/', label: 'Our Team' },
+    { icon: UserCheck, path: '/', label: 'Experts' },
+    { icon: Phone, path: '/', label: 'Request a Call' },
+    { icon: BookA, path: '/', label: 'Resources' },
+    { icon: Lock, path: '/', label: 'Data Security' },
+    { icon: HelpCircleIcon, path: '/', label: 'Help' },
+    { icon: Contact, path: '/', label: 'Contact Us' },
+    { icon: CircleArrowOutDownRightIcon, path: '/', label: 'Terms and Conditions' },
   ];
+
 
   const springAnimation = {
     type: "spring",
