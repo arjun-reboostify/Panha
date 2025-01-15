@@ -140,8 +140,8 @@ const ContactForm: React.FC = () => {
   return (
     <div className="min-h-screen p-6 bg-black/5">
       <div className="max-w-6xl mx-auto bg-white/30 backdrop-blur-sm rounded-lg p-8">
-        <h1 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-          Contact Us
+        <h1 className="text-4xl font-bold text-center mb-12 text-blue-600">
+          QUERY PAGE
         </h1>
 
         {status.message && (
@@ -245,7 +245,7 @@ const ContactForm: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-lg"
+              className="w-full px-8 py-4 bg-blue-300"
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>

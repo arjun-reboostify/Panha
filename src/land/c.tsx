@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Ani from './ani'
 import E from './assets/a.jpg'
 import C from './choices'
+import Footer from './footer'
 import { 
   Home, 
   BookOpen, 
@@ -26,6 +27,7 @@ Cpu,
 import Nav from './test'
 import Contact from './Contactform'
 import Hero from './hero'
+import Hand from './hand'
 
 type Item = {
   id: number;
@@ -189,6 +191,8 @@ const LandingPage = () => {
       {/* This div is 20vh tall but invisible */}
     </div>
     <Ani />
+
+
     <div className="h-[15vh] bg-black p-5 flex items-center justify-center">
   <span className="text-white text-3xl sm:text-4xl md:text-5xl underline">Our Services</span>
 </div>
@@ -220,8 +224,11 @@ const LandingPage = () => {
     ))}
   </div>
 </div>
-<Contact/>
+<Hand/>
 <C/>
+<Contact/>
+<Footer/>
+
     
     
     {/* <Hero />
