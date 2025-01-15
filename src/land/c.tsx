@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Ani from './ani'
 import E from './assets/a.jpg'
+import C from './choices'
 import { 
   Home, 
   BookOpen, 
@@ -194,8 +195,8 @@ const LandingPage = () => {
 
 <div className="max-w-screen-lg mx-auto p-6">
   <header className="text-center mb-8">
-    <h1 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-     Help Is Available
+    <h1 className="text-4xl  font-bold text-blue-700">
+    HELP IS AVAILABLE
     </h1>
     <p className="text-lg sm:text-xl text-gray-500">we understand , we care</p>
   </header>
@@ -204,7 +205,7 @@ const LandingPage = () => {
     {items.map((item) => (
       <div
         key={item.id}
-        className="bg-transparent border border-gray-300 p-4 rounded-lg shadow-lg"
+        className="bg-transparent p-4 "
       >
         <h2 className="text-4xl font-bold text-blue-600 mb-4">{item.title}</h2> {/* Title above image and text */}
         <div className="flex space-x-4 sm:space-x-6">
@@ -219,8 +220,8 @@ const LandingPage = () => {
     ))}
   </div>
 </div>
-
-
+<Contact/>
+<C/>
     
     
     {/* <Hero />
