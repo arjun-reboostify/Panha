@@ -22,7 +22,7 @@ const ScrollSectionAnimation = () => {
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
       event.preventDefault(); // Prevent the default scroll action
-      const scrollSpeed = 0.3; // Slow down factor (0.5 = half the speed)
+      const scrollSpeed = 0.2; // Slow down factor (0.5 = half the speed)
       const scrollAmount = event.deltaY * scrollSpeed; // Adjust scroll speed
       window.scrollBy(0, scrollAmount); // Move the page by the adjusted amount
     };
@@ -36,7 +36,7 @@ const ScrollSectionAnimation = () => {
   }, []);
 
   // Animation transforms based on scrollYProgress
-  const topLeftX = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [0, 500, isMobile ? 500 : 750]);
+  const topLeftX = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [0,750, isMobile ? 500 : 900]);
   const topLeftY = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [0, 250, isMobile ? 250 : 350]);
   const topLeftScale = useTransform(scrollYProgress, [0, 0.3, animationRange[1]], [1, 0.98, 1]);
   const topLeftRotate = useTransform(scrollYProgress, animationRange, [0, 0]);
@@ -45,8 +45,8 @@ const ScrollSectionAnimation = () => {
   const topRightRotate = useTransform(scrollYProgress, animationRange, [0, -18.75]);
   const topRightOpacity = useTransform(scrollYProgress, [0, 0.4, animationRange[1]], [1, 0.5, 0]);
 
-  const bottomLeftX = useTransform(scrollYProgress, [0, 0, animationRange[1]], [-500, 100, 10]); // Start earlier
-const bottomLeftRotate = useTransform(scrollYProgress, animationRange, [-18.75, 0]);
+  const bottomLeftX = useTransform(scrollYProgress, [0, 0, animationRange[1]], [-100, 30, 0]); // Start earlier
+const bottomLeftRotate = useTransform(scrollYProgress, animationRange, [-10, 5]);
 const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.1, animationRange[1]], [0, 1, 1]); // Start with opacity 1 earlier
 
   const cardBaseStyle = "relative max-w-full h-full";

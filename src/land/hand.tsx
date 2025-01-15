@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState,useEffect} from 'react';
 
 interface QAItem {
   question: string;
@@ -6,6 +6,7 @@ interface QAItem {
 }
 
 const QAComponent = () => {
+    const [isMobile, setIsMobile] = useState(false);
   const qaItems: QAItem[] = [
     {
       question: "What is your primary goal?",
@@ -21,8 +22,18 @@ const QAComponent = () => {
     }
   ];
 
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   return (
-    <div className="relative w-full min-h-screen p-4 overflow-hidden">
+    <div className={`relative w-full min-h-screen p-4 ${isMobile ? 'overflow-hidden' : ''}`}>
       {/* Left hand */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-50 md:w-50 lg:w-50">
         <img 
