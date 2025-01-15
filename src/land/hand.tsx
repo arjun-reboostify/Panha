@@ -9,16 +9,20 @@ const QAComponent = () => {
     const [isMobile, setIsMobile] = useState(false);
   const qaItems: QAItem[] = [
     {
-      question: "What is your primary goal?",
-      answer: "Our primary goal is to deliver exceptional value to our customers."
+      question: "What does panha exactly do?",
+      answer: "PANHA is a safe and supportive platform offering a Comprehensive solution for individuals dealing with trauma , mental health issue or personal issue"
     },
     {
-      question: "How do we achieve success?",
-      answer: "Through dedication, innovation, and constant improvement."
+      question: "Which types of services PANHA offers?",
+      answer: "PANHA offer a one step solution to your problems by providing you with a buddy service , anonymous chat platform and a counselling therapy session"
+
     },
     {
-      question: "Why choose us?",
-      answer: "We bring years of expertise and a commitment to excellence."
+      question: "Which types of problems can we share with buddy?",
+      answer: "we provide buddy for you to share any sort of problem with them ( breakup, family disputes , academics pressure, financial stress, loneliness , overthinking or any other challenge)."
+    },
+    {question:"Is our talk here anonymous?",
+        answer:"Every problem you shared is its purely confidential because we understand and we care."
     }
   ];
 
@@ -34,6 +38,8 @@ const QAComponent = () => {
   }, []);
   return (
     <div className={`relative w-full min-h-screen p-4 ${isMobile ? 'overflow-hidden' : ''}`}>
+
+        <h1 className='text-center text-4xl font-bold text-blue-400'>QUESTIONS AND ANSWERS</h1>
       {/* Left hand */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-50 md:w-50 lg:w-50">
         <img 

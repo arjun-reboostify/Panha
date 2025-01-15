@@ -170,19 +170,19 @@ const LandingPage = () => {
       id: 1,
       title: "BUDDY",
       imageSrc: "/buddy.png",
-      description: "bla bla"
+      description: "Non judgemental and purely confidential peer support , you can now share your every problem to them"
     },
     {
       id: 2,
       title: "ANONYMOUS CHAT",
       imageSrc: "/chat.png",
-      description: "lorem ipsum "
+      description: "Community where you can share your problems then after we will connect you with experts like legal , financial , psychologist depending upon your query "
     },
     {
       id: 3,
       title: "COUNSELLING",
       imageSrc: "/counselling.png",
-       description: "test test its my subject"
+       description: "Connect with our best counsellor , therapist and psychiatrist "
     }
   ];
  

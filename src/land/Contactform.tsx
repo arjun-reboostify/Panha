@@ -14,20 +14,20 @@ const ContactSection = () => {
   const [formError, setFormError] = useState<string>('');
 
   const socialLinks: SocialLink[] = [
-    {
-      icon: <Github className="w-5 h-5" />,
-      name: 'GitHub',
-      href: 'https://github.com/yourusername'
-    },
-    {
-      icon: <Twitter className="w-5 h-5" />,
-      name: 'Twitter',
-      href: 'https://twitter.com/yourusername'
-    },
+    // {
+    //   icon: <Github className="w-5 h-5" />,
+    //   name: 'GitHub',
+    //   href: 'https://github.com/yourusername'
+    // },
+    // {
+    //   icon: <Twitter className="w-5 h-5" />,
+    //   name: 'Twitter',
+    //   href: 'https://twitter.com/yourusername'
+    // },
     {
       icon: <Linkedin className="w-5 h-5" />,
       name: 'LinkedIn',
-      href: 'https://linkedin.com/in/yourusername'
+      href: 'https://www.linkedin.com/company/panha/posts/?feedView=all'
     }
   ];
 
@@ -156,7 +156,7 @@ const ContactSection = () => {
                   whileHover={{ x: 4 }}
                 >
                   <Mail className="w-5 h-5 text-black/60 group-hover:text-black/80" />
-                  <span className="text-black/60 group-hover:text-black/80">contact@example.com</span>
+                  <span className="text-black/60 group-hover:text-black/80">Message.panha@gmail.com</span>
                 </motion.a>
                 <motion.a
                   href="tel:+1234567890"
@@ -164,7 +164,7 @@ const ContactSection = () => {
                   whileHover={{ x: 4 }}
                 >
                   <Phone className="w-5 h-5 text-black/60 group-hover:text-black/80" />
-                  <span className="text-black/60 group-hover:text-black/80">+1 (234) 567-890</span>
+                  <span className="text-black/60 group-hover:text-black/80">+91 93553 43709</span>
                 </motion.a>
               </div>
             </div>

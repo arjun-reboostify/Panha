@@ -35,16 +35,19 @@ const ContactForm: React.FC = () => {
 
   const faqs = [
     {
-      question: "What information do I need to provide?",
+      question: "1.What exactly does PANHA do?",
       answer: "Please provide your full name, email address, phone number, and your message."
     },
     {
-      question: "How long until I receive a response?",
+      question: "2Which types of services PANHA offers?",
       answer: "We typically respond within 24-48 business hours."
     },
     {
-      question: "Is my information secure?",
+      question: "3.Which types of problems can we share with buddy?",
       answer: "Yes, we take data privacy seriously and protect all submitted information."
+    },
+    {question:"4.Is our talk here anonymous?",
+      answer:""
     }
   ];
 
