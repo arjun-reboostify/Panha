@@ -7,6 +7,21 @@ const ScrollSectionAnimation = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const handleScroll = (event: WheelEvent) => {
+      event.preventDefault(); // Prevent the default scroll action
+      const scrollSpeed = 0.2; // Slow down factor (0.5 = half the speed)
+      const scrollAmount = event.deltaY * scrollSpeed; // Adjust scroll speed
+      window.scrollBy(0, scrollAmount); // Move the page by the adjusted amount
+    };
+
+    // Listen for wheel event and apply the scroll slowdown
+    window.addEventListener('wheel', handleScroll, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, []);
+  useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
