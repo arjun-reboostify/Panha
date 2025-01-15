@@ -52,9 +52,7 @@ const NavBar = () => {
 
   // Desktop Toggle Menu Items
   const desktopToggleItems: NavItem[] = [
-    { icon: Home, path: '/', label: 'Home' },
-    { icon: Info, path: '/', label: 'About' },
-    { icon: WorkflowIcon, path: '/', label: 'Our Service' },
+  
     { icon: User2Icon, path: '/', label: 'Our Team' },
     { icon: UserCheck, path: '/', label: 'Experts' },
     { icon: Phone, path: '/', label: 'Request a Call' },
