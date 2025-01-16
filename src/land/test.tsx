@@ -263,21 +263,7 @@ const NavBar = () => {
         <ActionButton href="/call" label="Call">
           <CallIcon />
         </ActionButton>
-        <ActionButton href="/call" label="Call">
-          <CallIcon />
-        </ActionButton>
-        <ActionButton href="/call" label="Call">
-          <CallIcon />
-        </ActionButton>
-        <ActionButton href="/call" label="Call">
-          <CallIcon />
-        </ActionButton>
-        <ActionButton href="/call" label="Call">
-          <CallIcon />
-        </ActionButton>
-        <ActionButton href="/call" label="Call">
-          <CallIcon />
-        </ActionButton>
+       
         <ActionButton href="/chat" label="Chat">
           <WhatsAppIcon />
         </ActionButton>
