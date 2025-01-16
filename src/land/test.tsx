@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { UserCheck, User2Icon, WorkflowIcon, Info, Menu, X, Home, ChevronUp, ChevronDown, Phone, BookA, Lock, CircleArrowOutDownRightIcon, HelpCircleIcon, Contact } from 'lucide-react';
+import { UserCheck, User2Icon, WorkflowIcon, Info, Menu, X, Home, ChevronUp, ChevronDown, Phone, BookA, Lock, CircleArrowOutDownRightIcon, HelpCircleIcon, Contact,ChevronLeft,ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -157,6 +157,27 @@ const NavBar = () => {
   );
 
   const SideMenu = ({ isMobile = false }) => {
+    const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  // Scroll right
+  const handleScrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: 200, // Scroll 200px to the right
+        behavior: 'smooth', // Smooth scrolling
+      });
+    }
+  };
+
+  // Scroll left
+  const handleScrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: -200, // Scroll 200px to the left
+        behavior: 'smooth', // Smooth scrolling
+      });
+    }
+  };
     const isOpen = isMobile ? isMobileMenuOpen : isDesktopMenuOpen;
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -233,20 +254,56 @@ const NavBar = () => {
               </div>
 
               {/* Action buttons */}
-              <div className=" border-t border-gray-200">
-                <div className="flex justify-between space-x-1 overflow-x-auto whitespace-nowrap">
-                  <ActionButton href="/call" label="Call">
-                    <CallIcon />
-                  </ActionButton>
-                 
-                  <ActionButton href="/chat" label="Chat">
-                    <WhatsAppIcon />
-                  </ActionButton>
-                </div>
-              </div>
+              <div className="p-4 border-t border-gray-200">
+      {/* Scrollable Content */}
+      <div
+        className="flex justify-start space-x-1 overflow-x-auto whitespace-nowrap"
+        ref={scrollRef}
+      >
+        <ActionButton href="/call" label="Call">
+          <CallIcon />
+        </ActionButton>
+        <ActionButton href="/call" label="Call">
+          <CallIcon />
+        </ActionButton>
+        <ActionButton href="/call" label="Call">
+          <CallIcon />
+        </ActionButton>
+        <ActionButton href="/call" label="Call">
+          <CallIcon />
+        </ActionButton>
+        <ActionButton href="/call" label="Call">
+          <CallIcon />
+        </ActionButton>
+        <ActionButton href="/call" label="Call">
+          <CallIcon />
+        </ActionButton>
+        <ActionButton href="/chat" label="Chat">
+          <WhatsAppIcon />
+        </ActionButton>
+      </div>
 
+      {/* Scroll Buttons */}
+      <div className="flex justify-between mt-2">
+        {/* Left Scroll Button */}
+        <button
+          onClick={handleScrollLeft}
+          className="flex justify-center items-center bg-gray-100 hover:bg-gray-200 p-2 rounded"
+        >
+          <ChevronLeft size={24} />
+        </button>
+
+        {/* Right Scroll Button */}
+        <button
+          onClick={handleScrollRight}
+          className="flex justify-center items-center bg-gray-100 hover:bg-gray-200 p-2 rounded"
+        >
+          <ChevronRight size={24} />
+        </button>
+      </div>
+    </div>
               {/* Scroll buttons */}
-              <div className="absolute bottom-20 right-4 flex flex-col space-y-2">
+              <div className="absolute bottom-40 right-4 flex flex-col space-y-2">
                 <button
                   onClick={() => handleScroll('up')}
                   className="p-2 rounded-full bg-white shadow-lg hover:bg-gray-100"
