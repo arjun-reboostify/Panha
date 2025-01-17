@@ -31,23 +31,26 @@ const NavBar = () => {
 
   // Navigation Items
   const mobileToggleItems: NavItem[] = [
-    { icon: Home, path: '/', label: 'Home' },
-    { icon: Info, path: '/', label: 'About' },
-    { icon: WorkflowIcon, path: '/', label: 'Our Service' },
-    { icon: User2Icon, path: '/', label: 'Our Team' },
-    { icon: UserCheck, path: '/', label: 'Experts' },
-    { icon: Phone, path: '/', label: 'Request a Call' },
-    { icon: BookA, path: '/', label: 'Resources' },
-    { icon: Lock, path: '/', label: 'Data Security' },
-    { icon: HelpCircleIcon, path: '/', label: 'Help' },
-    { icon: Contact, path: '/', label: 'Contact Us' },
-    { icon: CircleArrowOutDownRightIcon, path: '/', label: 'Terms and Conditions' },
+    { icon: Home, path: '/form', label: 'Form' },
+    { icon: Info, path: '/login', label: 'Register' },
+    { icon: WorkflowIcon, path: '/register', label: 'Login' },
+    { icon: Home, path: '/form', label: 'Home' },
+    { icon: Info, path: '/form', label: 'About' },
+    { icon: WorkflowIcon, path: '/form', label: 'Our Service' },
+    { icon: User2Icon, path: '/form', label: 'Our Team' },
+    { icon: UserCheck, path: '/form', label: 'Experts' },
+    { icon: Phone, path: '/form', label: 'Request a Call' },
+    { icon: BookA, path: '/form', label: 'Resources' },
+    { icon: Lock, path: '/form', label: 'Data Security' },
+    { icon: HelpCircleIcon, path: '/form', label: 'Help' },
+    { icon: Contact, path: '/form', label: 'Contact Us' },
+    { icon: CircleArrowOutDownRightIcon, path: '/form', label: 'Terms and Conditions' },
   ];
 
   const topNavItems: NavItem[] = [
-    { icon: Home, path: '/', label: 'Home' },
-    { icon: Info, path: '/', label: 'About' },
-    { icon: WorkflowIcon, path: '/', label: 'Our Service' },
+    { icon: Home, path: '/form', label: 'Form' },
+    { icon: Info, path: '/login', label: 'Register' },
+    { icon: WorkflowIcon, path: '/register', label: 'Login' },
   ];
 
   const desktopToggleItems: NavItem[] = mobileToggleItems.slice(3);
