@@ -7,6 +7,8 @@ import {
 import ReactPlayer from "react-player";
 import { authToken, createMeeting } from "./api";
 
+import { useMediaDevice } from "@videosdk.live/react-sdk";
+
 interface JoinScreenProps {
   getMeetingAndToken: (meeting?: string) => void;
 }
@@ -22,9 +24,32 @@ interface ParticipantViewProps {
 
 const ParticipantView: React.FC<ParticipantViewProps> = ({ participantId }) => {
   const micRef = useRef<HTMLAudioElement>(null);
+  const { checkPermissions } = useMediaDevice();
+  
   const { webcamStream, micStream, webcamOn, micOn, isLocal, displayName } =
     useParticipant(participantId);
+    const { enableWebcam, disableWebcam, enableMic, disableMic } =
+    useParticipant("<participant-id>");
 
+  const handleEnableWebcam = () => {
+    // This will emit an event called "onWebcamRequested" to that particular participant
+    enableWebcam();
+  };
+
+  const handleEnableMic = () => {
+    // This will emit an event called "onMicRequested" to that particular participant
+    enableMic();
+  };
+
+  const handleDisableWebcam = () => {
+    // This will disable the webcam of that particular participant
+    disableWebcam();
+  };
+
+  const handleDisableMic = () => {
+    // This will disable the mic of that particular participant
+    disableMic();
+  };
   const videoStream = useMemo(() => {
     if (webcamOn && webcamStream) {
       const mediaStream = new MediaStream();
@@ -53,6 +78,7 @@ const ParticipantView: React.FC<ParticipantViewProps> = ({ participantId }) => {
 
   return (
     <div key={participantId}>
+         
       <p>
         Participant: {displayName} | Webcam: {webcamOn ? "ON" : "OFF"} | Mic:{" "}
         {micOn ? "ON" : "OFF"}
@@ -63,7 +89,7 @@ const ParticipantView: React.FC<ParticipantViewProps> = ({ participantId }) => {
           playsinline
           pip={false}
           light={false}
-          controls={false}
+        
           muted={true}
           playing={true}
           url={videoStream}
@@ -74,6 +100,7 @@ const ParticipantView: React.FC<ParticipantViewProps> = ({ participantId }) => {
           }}
         />
       )}
+      
     </div>
   );
 };
