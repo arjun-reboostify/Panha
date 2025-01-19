@@ -21,6 +21,7 @@ import Stat from './threed/stat'
 import Premium from './threed/premiumaccess'
 import {PremiumRoute} from './threed/premiumroute'
 import Info from './threed/info'
+import Call from './call/call'
 
 // Protected Route Component
 const ProtectedRoute = () => {
@@ -78,6 +79,7 @@ const router = createBrowserRouter([
       { path: "welcome", element: <Landing /> },
       { path: "form", element: <Fom /> },
       { path: "info", element: <Info /> },
+      { path: "Call", element: <Call /> },
   
       {path: "stat",
 
