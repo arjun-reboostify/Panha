@@ -4,9 +4,15 @@ import { authToken, createMeeting } from "./api";
 import { Phone, PhoneOff, Mic, MicOff, Globe } from "lucide-react";
 import { noterFirestore, firebaseTimestamp,noterAuth } from "../firebase/index";
 import getCurrentUser from '../firebase/utils/getCurrentUser';
+interface UserProfile {
+ 
+    uid: string;
+    displayName?: string;
+    email?: string;
+  }
 interface JoinScreenProps {
   getMeetingAndToken: (meeting?: string) => void;
-  isAdmin: boolean;
+  isAdmin?: boolean; // Make this optional
 }
 
 interface MeetingViewProps {
@@ -77,6 +83,7 @@ interface ActiveMeeting {
   const JoinScreen: React.FC<JoinScreenProps> = ({ getMeetingAndToken }) => {
     const [meetingId, setMeetingId] = useState<string>();
     const [showWorld, setShowWorld] = useState(false);
+      const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
    const [isAdmin, setIsAdmin] = useState(false);
     const onClick = async () => {
       getMeetingAndToken(meetingId);
@@ -142,13 +149,13 @@ interface ActiveMeeting {
                 <Phone className="h-5 w-5" />
                 <span>Create New Call</span>
               </button>
-              <button
+              {isAdmin && ( <button
                 className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all flex items-center justify-center space-x-2"
                 onClick={() => setShowWorld(!showWorld)}
               >
                 <Globe className="h-5 w-5" />
                 <span>Talk with a buddy</span>
-              </button>
+              </button>)}
               {showWorld && (
               <div className="mt-6">
                 <WorldMeetings onJoinMeeting={getMeetingAndToken} />
@@ -384,7 +391,7 @@ const App: React.FC = () => {
           <MeetingView meetingId={meetingId} onMeetingLeave={onMeetingLeave} />
         </MeetingProvider>
       ) : (
-        <JoinScreen getMeetingAndToken={getMeetingAndToken} />
+        <JoinScreen  getMeetingAndToken={getMeetingAndToken} />
       );
     };
     
