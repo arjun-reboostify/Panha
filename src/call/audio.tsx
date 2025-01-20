@@ -2,11 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { MeetingProvider, useMeeting, useParticipant } from "@videosdk.live/react-sdk";
 import { authToken, createMeeting } from "./api";
 import { Phone, PhoneOff, Mic, MicOff, Globe } from "lucide-react";
-import { noterFirestore, firebaseTimestamp,noterAuth } from "../firebase/index";
+import { noterFirestore, firebaseTimestamp } from "../firebase/index";
 import getCurrentUser from '../firebase/utils/getCurrentUser';
 interface JoinScreenProps {
   getMeetingAndToken: (meeting?: string) => void;
-  isAdmin: boolean;
 }
 
 interface MeetingViewProps {
@@ -25,7 +24,6 @@ interface ActiveMeeting {
     createdAt: Date;
     participantCount: number;
   }
-  const ADMIN_EMAILS = ['ee@ee.com', 'superadmin@noter.com'];
   
   const WorldMeetings: React.FC<{ onJoinMeeting: (meetingId: string) => void }> = ({ onJoinMeeting }) => {
     const [meetings, setMeetings] = useState<ActiveMeeting[]>([]);
@@ -77,7 +75,7 @@ interface ActiveMeeting {
   const JoinScreen: React.FC<JoinScreenProps> = ({ getMeetingAndToken }) => {
     const [meetingId, setMeetingId] = useState<string>();
     const [showWorld, setShowWorld] = useState(false);
-   const [isAdmin, setIsAdmin] = useState(false);
+  
     const onClick = async () => {
       getMeetingAndToken(meetingId);
     };
@@ -91,25 +89,7 @@ interface ActiveMeeting {
     
         return () => unsubscribe();
       }, []);
-      useEffect(() => {
-        const unsubscribe = noterAuth.onAuthStateChanged(async (user) => {
-          if (user) {
-            const userProfile: UserProfile = {
-          
-              uid: user.uid,
-              displayName: user.displayName || 'Anonymous',
-              email: user.email || ''
-            };
-            setCurrentUser(userProfile);
-            setIsAdmin(ADMIN_EMAILS.includes(userProfile.email || ''));
-          } else {
-            setCurrentUser(null);
-            setIsAdmin(false);
-          }
-        });
     
-        return () => unsubscribe();
-      }, []);
       const getThemeClasses = () => {
         if (meetingsCount > 0) {
           return "bg-green-50 border-green-200 text-green-700";
