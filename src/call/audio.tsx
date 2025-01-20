@@ -2,16 +2,26 @@ import React, { useEffect, useRef, useState } from "react";
 import { MeetingProvider, useMeeting, useParticipant } from "@videosdk.live/react-sdk";
 import { authToken, createMeeting } from "./api";
 import { Phone, PhoneOff, Mic, MicOff, Globe } from "lucide-react";
-import { noterFirestore, firebaseTimestamp } from "../firebase/index";
+import { noterFirestore, firebaseTimestamp,noterAuth } from "../firebase/index";
 import getCurrentUser from '../firebase/utils/getCurrentUser';
+interface UserProfile {
+ 
+    uid: string;
+    displayName?: string;
+    email?: string;
+  }
 interface JoinScreenProps {
   getMeetingAndToken: (meeting?: string) => void;
+  isAdmin?: boolean; // Make this optional
 }
 
 interface MeetingViewProps {
   onMeetingLeave: () => void;
   meetingId: string;
 }
+interface WorldMeetingsCounterProps {
+    className?: string;
+  }
 
 interface ParticipantViewProps {
   participantId: string;
@@ -21,6 +31,7 @@ interface ActiveMeeting {
     createdAt: Date;
     participantCount: number;
   }
+  const ADMIN_EMAILS = ['ee@ee.com', 'superadmin@noter.com'];
   
   const WorldMeetings: React.FC<{ onJoinMeeting: (meetingId: string) => void }> = ({ onJoinMeeting }) => {
     const [meetings, setMeetings] = useState<ActiveMeeting[]>([]);
@@ -42,6 +53,7 @@ interface ActiveMeeting {
   
     return (
       <div className="space-y-4">
+        
         <h3 className="text-lg font-semibold text-gray-700">Active Meetings</h3>
         <div className="grid grid-cols-1 gap-4">
           {meetings.map((meeting) => (
@@ -71,18 +83,84 @@ interface ActiveMeeting {
   const JoinScreen: React.FC<JoinScreenProps> = ({ getMeetingAndToken }) => {
     const [meetingId, setMeetingId] = useState<string>();
     const [showWorld, setShowWorld] = useState(false);
-  
+      const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
+   const [isAdmin, setIsAdmin] = useState(false);
     const onClick = async () => {
       getMeetingAndToken(meetingId);
     };
-  
-    return (
+    const [meetingsCount, setMeetingsCount] = useState<number>(0);
+    useEffect(() => {
+        const unsubscribe = noterFirestore
+          .collection("active-meetings")
+          .onSnapshot((snapshot) => {
+            setMeetingsCount(snapshot.docs.length);
+          });
+    
+        return () => unsubscribe();
+      }, []);
+      useEffect(() => {
+        const unsubscribe = noterAuth.onAuthStateChanged(async (user) => {
+          if (user) {
+            const userProfile: UserProfile = {
+          
+              uid: user.uid,
+              displayName: user.displayName || 'Anonymous',
+              email: user.email || ''
+            };
+            setCurrentUser(userProfile);
+            setIsAdmin(ADMIN_EMAILS.includes(userProfile.email || ''));
+          } else {
+            setCurrentUser(null);
+            setIsAdmin(false);
+          }
+        });
+    
+        return () => unsubscribe();
+      }, []);
+      const getThemeClasses = () => {
+        if (meetingsCount > 0) {
+          return "bg-green-50 border-green-200 text-green-700";
+        }
+        return "bg-red-50 border-red-200 text-red-700";
+      };
+    return (<> <div className={`flex items-center justify-center p-4 border rounded-lg ${getThemeClasses()} `}>
+    <div className="text-center">
+      <h3 className="text-lg font-semibold mb-1">Status</h3>
+      {meetingsCount > 0 ? (
+        <p className="font-medium">
+          {meetingsCount} {meetingsCount !== 1 ? 's' : ''} Buddy Online
+        </p>
+      ) : (
+        <p className="font-medium">No Buddy Available right now</p>
+      )}
+    </div>
+  </div>
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        
         <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full">
           <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
             Join Audio Meeting
           </h2>
           <div className="space-y-6">
+          <button
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all flex items-center justify-center space-x-2"
+                onClick={() => getMeetingAndToken()}
+              >
+                <Phone className="h-5 w-5" />
+                <span>Create New Call</span>
+              </button>
+              {isAdmin && ( <button
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all flex items-center justify-center space-x-2"
+                onClick={() => setShowWorld(!showWorld)}
+              >
+                <Globe className="h-5 w-5" />
+                <span>Talk with a buddy</span>
+              </button>)}
+              {showWorld && (
+              <div className="mt-6">
+                <WorldMeetings onJoinMeeting={getMeetingAndToken} />
+              </div>
+            )}
             <input
               type="text"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
@@ -95,37 +173,20 @@ interface ActiveMeeting {
                 onClick={onClick}
               >
                 <Phone className="h-5 w-5" />
-                <span>Join Call</span>
+                <span>Join with id</span>
               </button>
               <div className="flex items-center">
                 <div className="flex-1 h-px bg-gray-300"></div>
                 <span className="px-4 text-gray-500 text-sm">or</span>
                 <div className="flex-1 h-px bg-gray-300"></div>
               </div>
-              <button
-                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all flex items-center justify-center space-x-2"
-                onClick={() => getMeetingAndToken()}
-              >
-                <Phone className="h-5 w-5" />
-                <span>Create New Call</span>
-              </button>
-              <button
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all flex items-center justify-center space-x-2"
-                onClick={() => setShowWorld(!showWorld)}
-              >
-                <Globe className="h-5 w-5" />
-                <span>World Meetings</span>
-              </button>
+              
             </div>
             
-            {showWorld && (
-              <div className="mt-6">
-                <WorldMeetings onJoinMeeting={getMeetingAndToken} />
-              </div>
-            )}
+           
           </div>
         </div>
-      </div>
+      </div></>
     );
   };
   
@@ -180,32 +241,27 @@ const ParticipantView: React.FC<ParticipantViewProps> = ({ participantId }) => {
 
 
 const MeetingView: React.FC<MeetingViewProps> = ({ onMeetingLeave, meetingId }) => {
-    
-  const [joined, setJoined] = useState<string | null>(null);
-  
-  const { join, leave, participants } = useMeeting({
-    onMeetingJoined: () => {
+    const [joined, setJoined] = useState<string | null>(null);
+    const { join, leave, participants, toggleMic, unmuteMic, muteMic, localMicOn } = useMeeting({
+      onMeetingJoined: () => {
         setJoined("JOINED");
-        // Add meeting to Firestore when joined
         noterFirestore.collection("active-meetings").doc(meetingId).set({
           id: meetingId,
           createdAt: firebaseTimestamp(),
-          participantCount: 1
+          participantCount: 1,
+          active: true
         });
       },
       onMeetingLeft: () => {
-        // Remove meeting from Firestore when left
         noterFirestore.collection("active-meetings").doc(meetingId).delete();
         onMeetingLeave();
       },
       onParticipantJoined: () => {
-        // Update participant count
         noterFirestore.collection("active-meetings").doc(meetingId).update({
           participantCount: participants.size + 1
         });
       },
       onParticipantLeft: () => {
-        // Update participant count
         noterFirestore.collection("active-meetings").doc(meetingId).update({
           participantCount: Math.max(0, participants.size - 1)
         });
@@ -221,56 +277,79 @@ const MeetingView: React.FC<MeetingViewProps> = ({ onMeetingLeave, meetingId }) 
       leave();
       setJoined(null);
     };
-
-  return (
-    <div className="container mx-auto p-6 max-w-4xl">
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h3 className="text-2xl font-bold text-gray-800">
-            Active Call
-          </h3>
-          <p className="text-gray-500">ID: {meetingId}</p>
+  
+    const handleToggleMic = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      toggleMic();
+    };
+  
+    return (
+      <div className="container mx-auto p-6 max-w-4xl">
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h3 className="text-2xl font-bold text-gray-800">
+              Active Call
+            </h3>
+            <p className="text-gray-500">ID: {meetingId}</p>
+          </div>
+          
+          {joined === "JOINED" && (
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={handleToggleMic}
+                className={`${
+                  localMicOn ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'
+                } text-white px-6 py-3 rounded-lg transition-all flex items-center space-x-2`}
+              >
+                {localMicOn ? (
+                  <Mic className="h-5 w-5" />
+                ) : (
+                  <MicOff className="h-5 w-5" />
+                )}
+                <span>{localMicOn ? 'Mic On' : 'Mic Off'}</span>
+              </button>
+              
+              <button
+                onClick={disconnectCall}
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all flex items-center space-x-2"
+              >
+                <PhoneOff className="h-5 w-5" />
+                <span>End Call</span>
+              </button>
+            </div>
+          )}
         </div>
-        {joined === "JOINED" && (
-          <button
-            onClick={disconnectCall}
-            className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-all flex items-center space-x-2"
-          >
-            <PhoneOff className="h-5 w-5" />
-            <span>End Call</span>
-          </button>
+        
+        {joined === "JOINED" ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {Array.from(participants.keys()).map((participantId) => (
+              <ParticipantView
+                participantId={participantId}
+                key={participantId}
+              />
+            ))}
+          </div>
+        ) : joined === "JOINING" ? (
+          <div className="text-center py-12">
+            <div className="animate-pulse text-gray-600">
+              Joining the call...
+            </div>
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center space-x-2 mx-auto"
+              onClick={joinMeeting}
+            >
+              <Phone className="h-6 w-6" />
+              <span>Join Call</span>
+            </button>
+          </div>
         )}
       </div>
-      
-      {joined === "JOINED" ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {Array.from(participants.keys()).map((participantId) => (
-            <ParticipantView
-              participantId={participantId}
-              key={participantId}
-            />
-          ))}
-        </div>
-      ) : joined === "JOINING" ? (
-        <div className="text-center py-12">
-          <div className="animate-pulse text-gray-600">
-            Joining the call...
-          </div>
-        </div>
-      ) : (
-        <div className="text-center py-12">
-          <button
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all flex items-center space-x-2 mx-auto"
-            onClick={joinMeeting}
-          >
-            <Phone className="h-6 w-6" />
-            <span>Join Call</span>
-          </button>
-        </div>
-      )}
-    </div>
-  );
-};
+    );
+  };
+  
 
 const App: React.FC = () => {
     const [meetingId, setMeetingId] = useState<string | null>(null);
@@ -312,7 +391,7 @@ const App: React.FC = () => {
           <MeetingView meetingId={meetingId} onMeetingLeave={onMeetingLeave} />
         </MeetingProvider>
       ) : (
-        <JoinScreen getMeetingAndToken={getMeetingAndToken} />
+        <JoinScreen  getMeetingAndToken={getMeetingAndToken} />
       );
     };
     
