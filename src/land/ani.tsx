@@ -9,7 +9,7 @@ const ScrollSectionAnimation = () => {
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
       event.preventDefault(); // Prevent the default scroll action
-      const scrollSpeed = 0.2; // Slow down factor (0.5 = half the speed)
+      const scrollSpeed = 0.8; // Slow down factor (0.5 = half the speed)
       const scrollAmount = event.deltaY * scrollSpeed; // Adjust scroll speed
       window.scrollBy(0, scrollAmount); // Move the page by the adjusted amount
     };
@@ -32,7 +32,7 @@ const ScrollSectionAnimation = () => {
   }, []);
 
   // Ultra-short animation range to trigger quickly
-  const animationRange = isMobile ? [0, 0.15] : [0, 0.12];
+  const animationRange = isMobile ? [0, 0.009] : [0, 0.0001];
 
   // Quick-trigger transforms with early completion points
   const topLeftX = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [0, 750, isMobile ? 500 : 900]);
@@ -41,19 +41,23 @@ const ScrollSectionAnimation = () => {
   const topLeftRotate = useTransform(scrollYProgress, [0, animationRange[1]], [0, 0]);
 
   const topRightX = useTransform(scrollYProgress, [0, 0.08, animationRange[1]], [0, 500, isMobile ? 750 : 1000]);
-  const topRightRotate = useTransform(scrollYProgress, [0, animationRange[1]], [0, -5]);
+  //const topRightRotate = useTransform(scrollYProgress, [0, animationRange[1]], [0, -5]);
   const topRightOpacity = useTransform(scrollYProgress, [0, 0.08, animationRange[1]], [1, 0.9, 1]);
 
   // Enhanced bottom left animations for dramatic entrance
-  const bottomLeftX = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [-200, 0, 0]);
-  const bottomLeftRotate = useTransform(scrollYProgress, [0, animationRange[1]], [-10, 0]);
-  const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [0, 1, 1]);
+  //const bottomLeftX = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [-200, 100, 0]);
+  //const bottomLeftY = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [-200, 10, 0]);
+  //const bottomLeftRotate = useTransform(scrollYProgress, [0, animationRange[1]], [-10, 0]);
+  //const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.05, animationRange[1]], [0, 1, 1]);
+  const bottomLeftX = useTransform(scrollYProgress, [0, 0.1, animationRange[1]], [-300, 0, 0]); 
+const bottomLeftOpacity = useTransform(scrollYProgress, [0, 0.1, animationRange[1]], [0, 1, 1]);
+
 
   const cardBaseStyle = "relative max-w-full h-full transition-all duration-200"; // Faster transition
 
   return (
     <div
-      className={`min-h-screen ${isMobile ? 'h-[150vh] overflow-hidden' : 'h-[130vh]'} relative`} // Even shorter scroll height
+      className={`min-h-screen ${isMobile ? 'h-[118vh] overflow-hidden' : 'h-[105vh]'} relative`} // Even shorter scroll height
       style={{
         background: `url('') no-repeat center center fixed`,
         backgroundSize: 'cover'
@@ -88,7 +92,7 @@ const ScrollSectionAnimation = () => {
             className={`${cardBaseStyle} bg-transparent flex flex-col items-center justify-center ${isMobile ? 'h-1/2 mt-4' : 'h-full'}`}
             style={{
               x: topRightX,
-              rotate: topRightRotate,
+              //rotate: topRightRotate,
               opacity: topRightOpacity,
             }}
             initial={{ opacity: 0 }}
@@ -116,7 +120,8 @@ const ScrollSectionAnimation = () => {
             className={`${cardBaseStyle} bg-transparent ${isMobile ? 'col-span-1' : ''}`}
             style={{
               x: bottomLeftX,
-              rotate: bottomLeftRotate,
+              //y: bottomLeftY,
+              //rotate: bottomLeftRotate,
               opacity: bottomLeftOpacity,
             }}
             initial={{ opacity: 0, x: -200, rotate: -10 }}
